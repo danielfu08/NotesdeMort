@@ -1,33 +1,64 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8">
-    <title>Mi Escena A-Frame</title>
-    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
-  </head>
-  <body>
-    <a-scene>
-      <!-- Cielo -->
-      <a-sky color="#87CEEB"></a-sky>
+<head>
+  <meta charset="UTF-8">
+  <title>A-Frame Entrar</title>
+  <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+  <style>
+    #enterButton {
+      position: absolute;
+      z-index: 10;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 15px 30px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
 
-      <!-- Suelo -->
-      <a-plane position="0 0 0" rotation="-90 0 0" width="20" height="20" color="#7BC8A4"></a-plane>
+<button id="enterButton">Entrar</button>
 
-      <!-- Cubo -->
-      <a-box position="0 1 -3" rotation="0 45 0" color="#4CC3D9" shadow></a-box>
+<a-scene>
+  <!-- Cámara sin controles al inicio -->
+  <a-entity
+    id="cameraRig"
+    position="0 1.6 5"
+    movement-controls="enabled: false">
+    
+    <a-camera></a-camera>
+  </a-entity>
+  <!-- Luz -->
+  <a-light type="ambient" intensity="1"></a-light>
 
-      <!-- Esfera -->
-      <a-sphere position="2 1 -5" radius="1" color="#EF2D5E" shadow></a-sphere>
+  <!-- Suelo -->
+  <a-plane
+    rotation="-90 0 0"
+    width="20"
+    height="20"
+    color="#7BC8A4">
+  </a-plane>
 
-      <!-- Cilindro -->
-      <a-cylinder position="-2 1 -5" radius="0.5" height="2" color="#FFC65D" shadow></a-cylinder>
+  <!-- Modelo 3D -->
+  <a-entity
+    gltf-model="url(modelo.glb)"
+    position="0 0 -3"
+    scale="1 1 1">
+  </a-entity>
 
-      <!-- Luz -->
-      <a-light type="ambient" color="#FFF"></a-light>
-      <a-light type="directional" position="0 10 0" intensity="0.5" castShadow="true"></a-light>
+</a-scene>
 
-      <!-- Cámara -->
-      <a-entity camera look-controls wasd-controls position="0 1.6 5"></a-entity>
-    </a-scene>
-  </body>
+<script>
+  const button = document.getElementById("enterButton");
+  const cameraRig = document.getElementById("cameraRig");
+
+  button.addEventListener("click", () => {
+    cameraRig.setAttribute("movement-controls", "enabled: true");
+    button.style.display = "none";
+  });
+</script>
+
+</body>
 </html>
