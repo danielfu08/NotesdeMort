@@ -1,58 +1,54 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8">
   <title>A-Frame — final.glb con colisiones</title>
 
   <!-- A-Frame -->
   <script src="https://aframe.io/releases/1.4.1/aframe.min.js"></script>
 
-  <!-- Sistema de física (CANNON via aframe-physics-system) -->
+  <!-- Sistema de física (CANNON.js) -->
   <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-physics-system@4.0.1/dist/aframe-physics-system.min.js"></script>
 
-  <!-- Extras (movement-controls) para mover al jugador respetando la física -->
+  <!-- Extras para movimiento con físicas -->
   <script src="https://unpkg.com/aframe-extras@6.1.1/dist/aframe-extras.min.js"></script>
 </head>
 <body>
-  <a-scene physics="gravity: -9.8; solver: sequentialImpulse" renderer="antialias: true">
+  <a-scene physics="gravity: -9.8; solver: sequentialImpulse" renderer="antialias: true; colorManagement: true">
+    
+    <!-- Carga del modelo GLB -->
     <a-assets>
-      <!-- Asegúrate de que final.glb esté accesible en esta ruta -->
       <a-asset-item id="finalModel" src="final.glb"></a-asset-item>
     </a-assets>
 
-    <!-- Modelo GLB: lo tratamos como 'static-body' con shape: mesh para colisiones precisas -->
+    <!-- Modelo principal -->
     <a-entity id="escenario"
               gltf-model="#finalModel"
               position="0 0 0"
               rotation="0 0 0"
               scale="1 1 1"
-              static-body="shape: mesh">
+              static-body="shape: mesh"
+              material="metalness: 0; roughness: 1">
     </a-entity>
 
-    <!-- Cámara/jugador: un 'rig' con dynamic-body (esfera) y movement-controls.
-         Así el movimiento colisiona con cuerpos estáticos (como las paredes del modelo). -->
+    <!-- Suelo invisible para evitar que la cámara caiga al infinito -->
+    <a-plane rotation="-90 0 0" width="100" height="100" visible="false" static-body></a-plane>
+
+    <!-- Cámara/jugador con físicas (esfera) -->
     <a-entity id="playerRig" position="0 1.6 3"
               dynamic-body="mass: 70; shape: sphere; sphereRadius: 0.5"
               movement-controls="speed: 4; constrainToNavMesh: false">
-      <a-entity camera look-controls wasd-controls="acceleration: 200"></a-entity>
+      <a-entity camera look-controls wasd-controls></a-entity>
     </a-entity>
 
-    <!-- Luces -->
-    <a-entity light="type: ambient; intensity: 0.6"></a-entity>
-    <a-entity light="type: directional; intensity: 0.9" position="2 10 4"></a-entity>
+    <!-- Iluminación general -->
+    <a-entity light="type: ambient; intensity: 0.8; color: #ffffff"></a-entity>
+    <a-entity light="type: directional; intensity: 1; color: #ffffff" position="5 10 5" rotation="-45 45 0"></a-entity>
+    <a-entity light="type: hemisphere; skyColor: #ffffff; groundColor: #444444; intensity: 0.6"></a-entity>
 
-    <!-- Opcional: colisionadores invisibles para mejorar precisión / rendimiento
-         Si tu final.glb tiene geometría muy compleja, en lugar de usar shape: mesh puedes
-         crear cajas o planos invisibles con static-body para representar paredes. -->
-    <!-- <a-box position="0 1 -5" width="10" height="2" depth="0.2" visible="false" static-body></a-box> -->
-
-    <!-- Suelo visual alternativo (si quieres) -->
-    <!-- <a-plane rotation="-90 0 0" width="100" height="100" src="#someTexture" static-body></a-plane> -->
+    <!-- Luz puntual dentro del escenario (opcional, para interiores oscuros) -->
+    <a-entity light="type: point; intensity: 1; distance: 10; decay: 2; color: #ffffff" position="0 2 0"></a-entity>
 
   </a-scene>
 </body>
 </html>
-    button.style.display = "none";
-  });
-</script>
-</body>  
