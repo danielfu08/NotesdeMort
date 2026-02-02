@@ -2,8 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>A-Frame Entrar</title>
-  <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+  <title>Archivo █████</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
 
@@ -95,47 +94,31 @@
   </style>
 </head>
 <body>
+  <div class="noise"></div>
 
-<button id="enterButton">Entrar</button>
+  <div class="container">
+    <h1>ARCHIVO █████</h1>
+    <p>
+      Un hospital que no figura en los registros.<br>
+      Un paciente que <span>recordaba demasiado</span>.<br>
+      Un alto mando que nunca pensó ser observado.<br><br>
+      Las notas siguen ahí.<br>
+      Esperando a alguien que escuche.<br><br>
+      Esto no es una investigación.<br>
+      Es una <span>reconstrucción</span>.
+    </p>
 
-<a-scene>
-  <!-- Cámara sin controles al inicio -->
-  <a-entity
-    id="cameraRig"
-    position="0 1.6 5"
-    movement-controls="enabled: false">
-    
-    <a-camera></a-camera>
-  </a-entity>
-  <!-- Luz -->
-  <a-light type="ambient" intensity="1"></a-light>
+    <button onclick="startGame()">Abrir archivo</button>
 
-  <!-- Suelo -->
-  <a-plane
-    rotation="-90 0 0"
-    width="20"
-    height="20"
-    color="#7BC8A4">
-  </a-plane>
+    <div class="warning">
+      Algunas verdades no deberían recordarse.
+    </div>
+  </div>
 
-  <!-- Modelo 3D -->
-  <a-entity
-    gltf-model="url(modelo.glb)"
-    position="0 0 -3"
-    scale="1 1 1">
-  </a-entity>
-
-</a-scene>
-
-<script>
-  const button = document.getElementById("enterButton");
-  const cameraRig = document.getElementById("cameraRig");
-
-  button.addEventListener("click", () => {
-    cameraRig.setAttribute("movement-controls", "enabled: true");
-    button.style.display = "none";
-  });
-</script>
-
+  <script>
+    function startGame() {
+      window.location.href = "recepcion.html";
+    }
+  </script>
 </body>
 </html>
