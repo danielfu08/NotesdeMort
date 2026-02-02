@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>A-Frame Entrar</title>
+  <title>A-Frame Base 3D</title>
   <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
   <style>
     #enterButton {
@@ -22,29 +22,28 @@
 <button id="enterButton">Entrar</button>
 
 <a-scene>
-  <!-- Cámara sin controles al inicio -->
+
+  <!-- FONDO -->
+  <a-sky src="fondo.jpg" rotation="0 -90 0"></a-sky>
+
+  <!-- CÁMARA (bloqueada al inicio) -->
   <a-entity
     id="cameraRig"
-    position="0 1.6 5"
-    movement-controls="enabled: false">
-    
+    position="0 1.6 10"
+    wasd-controls="enabled: false; acceleration: 5; fly: false; keys: forward"
+    look-controls>
     <a-camera></a-camera>
   </a-entity>
-  <!-- Luz -->
-  <a-light type="ambient" intensity="1"></a-light>
 
-  <!-- Suelo -->
-  <a-plane
-    rotation="-90 0 0"
-    width="20"
-    height="20"
-    color="#7BC8A4">
-  </a-plane>
+  <!-- LUCES -->
+  <a-light type="ambient" intensity="0.7"></a-light>
+  <a-light type="directional" intensity="0.8" position="5 10 5"></a-light>
 
-  <!-- Modelo 3D -->
+  <!-- MODELO 3D COMO BASE / SUELO -->
   <a-entity
-    gltf-model="url(modelo.glb)"
-    position="0 0 -3"
+    gltf-model="sellers_mansion.glb"
+    position="-1 -3 -11"
+    rotation="0 90 0"
     scale="1 1 1">
   </a-entity>
 
@@ -55,10 +54,12 @@
   const cameraRig = document.getElementById("cameraRig");
 
   button.addEventListener("click", () => {
-    cameraRig.setAttribute("movement-controls", "enabled: true");
+    cameraRig.setAttribute(
+      "wasd-controls",
+      "enabled: true; acceleration: 0.5; fly: false; keys: forward"
+    );
     button.style.display = "none";
   });
 </script>
-
 </body>
 </html>
