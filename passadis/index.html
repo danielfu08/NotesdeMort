@@ -1,23 +1,22 @@
-<!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8">
-    <title>Mi Escena A-Frame</title>
-    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
-  </head>
-  <body>
-    <a-scene>
-      <!-- Cielo -->
-      <a-sky color="#87CEEB"></a-sky>
-    
+<!DOCTYPE html> <html lang="es">
+ <head>
+   <meta charset="UTF-8">
+   <title>Mi Escena A-Frame</title>
+   <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/aframe-physics-system@4.0.1/dist/aframe-physics-system.min.js"></script>
+
+
+ </head>
+ <body>
+   <a-scene physics="gravity: 0">
+     <!-- Cielo -->
+      <a-sky color="#000000"></a-sky>
       <!-- Luz -->
-      <a-light type="ambient" color="#FFF"></a-light>
-      <a-light type="directional" position="0 10 0" intensity="0.5" castShadow="true"></a-light>
-
-      <!-- Cámara -->
-      <a-entity camera look-controls wasd-controls position="0 25 5"></a-entity>
-      <a-entity gltf-model="passadis.glb" position="300 -150 -380" rotation="0 0 0" scale="0.5 0.5 0.5"></a-entity>
-
-    </a-scene>
-  </body>
-</html>
+       <a-light type="ambient" color="#FFF"></a-light>
+       <a-light type="directional" position="0 10 0" intensity="0.5" castShadow="true"></a-light>
+       <!-- Cámara -->
+       <a-entity  camera  look-controls  wasd-controls="acceleration: 80" position="0 25 5" dynamic-body="mass: 1; shape: capsule"></a-entity>    
+       <a-entity  gltf-model="passadis.glb"  position="300 -150 -380"  scale="0.5 0.5 0.5"  static-body></a-entity>  
+     </a-scene>
+ </body>
+ </html>
