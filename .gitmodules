@@ -1,0 +1,3 @@
+[submodule "NotesdeMort"]
+    path = NotesdeMort
+    url = https://github.com/usuario/NotesdeMort.git
