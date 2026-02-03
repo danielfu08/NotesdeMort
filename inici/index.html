@@ -1,53 +1,68 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>A-Frame — final.glb con colisiones</title>
+  <meta charset="UTF-8" />
+  <title>A-Frame — final.glb con teletransporte</title>
 
-  <!-- A-Frame -->
   <script src="https://aframe.io/releases/1.4.1/aframe.min.js"></script>
-
-  <!-- Sistema de física (CANNON.js) -->
-  <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-physics-system@4.0.1/dist/aframe-physics-system.min.js"></script>
-
-  <!-- Extras para movimiento con físicas -->
-  <script src="https://unpkg.com/aframe-extras@6.1.1/dist/aframe-extras.min.js"></script>
 </head>
 <body>
-  <a-scene physics="gravity: -9.8; solver: sequentialImpulse" renderer="antialias: true; colorManagement: true">
-    
-    <!-- Carga del modelo GLB -->
+  <a-scene cursor="rayOrigin: mouse" renderer="antialias: true; colorManagement: true">
+
+    <!-- Carga del GLB -->
     <a-assets>
       <a-asset-item id="finalModel" src="final.glb"></a-asset-item>
     </a-assets>
 
-    <!-- Modelo principal -->
-    <a-entity id="escenario"
-              gltf-model="#finalModel"
-              position="0 0 0"
+    <!-- Modelo visual -->
+    <a-entity gltf-model="#finalModel"
+              position="100 -200 0"
               rotation="0 0 0"
               scale="1 1 1"
-              static-body="shape: mesh"
-              material="metalness: 0; roughness: 1">
+              material="metalness:0; roughness:1">
     </a-entity>
 
-    <!-- Suelo invisible para evitar que la cámara caiga al infinito -->
-    <a-plane rotation="-90 0 0" width="100" height="100" visible="false" static-body></a-plane>
+    <!-- Esferas de teletransporte -->
+    <a-sphere class="teleport" position="33 61 -133" radius="3" color="#FF0000"></a-sphere>
+    <a-sphere class="teleport" position="33 61 152" radius="3" color="#FF0000"></a-sphere>
+    <a-sphere class="teleport" position="-128 61 -133" radius="3" color="#FF0000"></a-sphere>
+    <a-sphere class="teleport" position="-128 65 151" radius="3" color="#FF0000"></a-sphere>
+    <a-sphere class="teleport" position="-53 -0 133" radius="3" color="#FF0000" material="" geometry=""></a-sphere>
+    <a-sphere class="teleport" position="38 -0 -0" radius="3" color="#FF0000" material="" geometry=""></a-sphere>
+    <a-sphere class="teleport" position="-51 -0 -173" radius="3" color="#FF0000" material="" geometry=""></a-sphere>
+    <a-sphere class="teleport" position="-152 -0 -0" radius="4" color="#FF0000" material="" geometry=""></a-sphere>
 
-    <!-- Cámara/jugador con físicas (esfera) -->
-    <a-entity id="playerRig" position="0 1.6 3"
-              dynamic-body="mass: 70; shape: sphere; sphereRadius: 0.5"
-              movement-controls="speed: 4; constrainToNavMesh: false">
-      <a-entity camera look-controls wasd-controls></a-entity>
+    <!-- Cámara / jugador -->
+    <a-entity id="playerRig" position="0 0 0">
+      <a-entity camera look-controls>
+        <!-- Cursor para hacer click -->
+        <a-cursor fuse="false" raycaster="objects: .teleport"></a-cursor>
+      </a-entity>
     </a-entity>
 
-    <!-- Iluminación general -->
-    <a-entity light="type: ambient; intensity: 0.8; color: #ffffff"></a-entity>
-    <a-entity light="type: directional; intensity: 1; color: #ffffff" position="5 10 5" rotation="-45 45 0"></a-entity>
-    <a-entity light="type: hemisphere; skyColor: #ffffff; groundColor: #444444; intensity: 0.6"></a-entity>
+    <!-- Iluminación -->
+    <a-entity light="type: ambient; intensity: 0.7"></a-entity>
+    <a-entity light="type: directional; intensity: 1" position="105 -190 5" rotation="-45 45 0"></a-entity>
+    <a-entity light="type: hemisphere; skyColor: #ffffff; groundColor: #444444; intensity: 0.5"></a-entity>
 
-    <!-- Luz puntual dentro del escenario (opcional, para interiores oscuros) -->
-    <a-entity light="type: point; intensity: 1; distance: 10; decay: 2; color: #ffffff" position="0 2 0"></a-entity>
+    <!-- Componente de teletransporte -->
+    <script>
+      AFRAME.registerComponent('teleport-on-click', {
+        init: function () {
+          const spheres = document.querySelectorAll('.teleport');
+          const player = document.getElementById('playerRig');
+
+          spheres.forEach(function(sphere) {
+            sphere.addEventListener('click', function () {
+              const pos = sphere.getAttribute('position');
+              player.setAttribute('position', `${pos.x} ${pos.y + 1.6} ${pos.z}`);
+            });
+          });
+        }
+      });
+
+      document.querySelector('a-scene').setAttribute('teleport-on-click', '');
+    </script>
 
   </a-scene>
 </body>
