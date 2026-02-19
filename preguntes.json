@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "question": "¿Qué indica que algo no está del todo en orden en la recepción?"
+  },
+  {
+    "id": 2,
+    "question": "¿Qué revela el comportamiento del paciente en el lavabo?"
+  },
+  {
+    "id": 3,
+    "question": "¿Qué sugiere la experiencia del pasillo?"
+  },
+  {
+    "id": 4,
+    "question": "¿Qué revelan los registros de enfermería?"
+  },
+  {
+    "id": 5,
+    "question": "¿Qué insinúan los arañazos y marcas en las paredes?"
+  },
+  {
+    "id": 6,
+    "question": "¿Qué papel tienen los libros y los informes en la investigación?"
+  },
+  {
+    "id": 7,
+    "question": "¿Cuál fue la reacción del alto mando?"
+  },
+  {
+    "id": 8,
+    "question": "¿Qué revela la vista desde el ático?"
+  },
+  {
+    "id": 9,
+    "question": "¿Qué sugiere la intención del paciente al dejar notas?"
+  },
+  {
+    "id": 10,
+    "question": "¿Qué se necesita para comprender la verdad del caso?"
+  }
+]
