@@ -12,10 +12,17 @@
     <!-- Carga del GLB -->
     <a-assets>
       <a-asset-item id="finalModel" src="infermeria.glb"></a-asset-item>
+      <a-asset-item id="muerto" src="muerto.glb"></a-asset-item>
     </a-assets>
 
     <!-- Modelo visual -->
     <a-entity gltf-model="#finalModel"
+              position="0 -4.5 0"
+              rotation="0 0 0"
+              scale="1 1 1"
+              material="metalness:0; roughness:1">
+    </a-entity>
+    <a-entity gltf-model="#muerto"
               position="0 -4.5 0"
               rotation="0 0 0"
               scale="1 1 1"
