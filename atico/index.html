@@ -24,6 +24,7 @@
     <!-- Carga del GLB -->
     <a-assets>
       <a-asset-item id="aticModel" src="atic.glb"></a-asset-item>
+      <a-asset-item id="doorModel" src="door.glb"></a-asset-item>
     </a-assets>
 
     <!-- Modelo visual -->
@@ -31,6 +32,13 @@
               position="90 -25 -190"
               rotation="0 90 0"
               scale="0.25 0.25 0.25"
+              material="metalness:0; roughness:1">
+    </a-entity>
+    <a-entity id="door"
+              gltf-model="#doorModel"
+              position="-6.99 -30.5 -7.2"
+              rotation="0 90 0"
+              scale="0.6 0.5 0.8"
               material="metalness:0; roughness:1">
     </a-entity>
 
@@ -93,8 +101,7 @@
   </a-scene>
 
 <script defer>
-  questionGate("#trampilla", 0, "../atico/index.html", "status_llave1");
-  catchableObject("#key1","status_llave1", "🔑");
+  questionGate("#door", 0, "../passadis/index.html", "status_nota 1");
 
 </script>
 

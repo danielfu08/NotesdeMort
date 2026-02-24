@@ -23,7 +23,7 @@
 
     <!-- Carga del GLB -->
     <a-assets>
-      <a-asset-item id="keyModel" src="../keys/key.glb"></a-asset-item>
+      <a-asset-item id="noteModel" src="../keys/note.glb"></a-asset-item>
       <a-asset-item id="passModel" src="passadis.glb"></a-asset-item>
       <a-asset-item id="trapModel" src="trapdoor.glb"></a-asset-item>
     </a-assets>
@@ -44,26 +44,22 @@
               material="metalness:0; roughness:1">
     </a-entity>
 
-    <a-entity id="key1"
+    <a-entity id="note1"
         class="clickable" 
-        gltf-model="#keyModel"
+        gltf-model="#noteModel"
         position="-10 -15.300 -120"    
         rotation="0 0 0"
-        scale="0.01 0.01 0.01"
-            animation="property: rotation;
-               to: 0 360 0;
-               loop: true;
-               dur: 2000;
-               easing: linear">
+        scale="1 1 1"
+        material="metalness:0; roughness:1">
       </a-entity>
 
     <!-- Esferas de teletransporte -->
-    <a-sphere class="teleport" position="-1.798 -15.300 -120" radius="3" color="#FF0000"></a-sphere>
-    <a-sphere class="teleport" position="-1.798 -15.300 -10" radius="3" color="#FF0000"></a-sphere>
-    <a-sphere class="teleport" position="50.798 -15.300 -140" radius="3" color="#FF0000"></a-sphere>
-    <a-sphere class="teleport" position="50.798 -15.300 -200" radius="3" color="#FF0000"></a-sphere>
-    <a-sphere class="teleport2" position="60.798 10 -190" radius="3" color="#FF0000" material="" geometry=""></a-sphere>
-    <a-sphere class="teleport2" position="170.798 10 -190" radius="3" color="#FF0000" material="" geometry=""></a-sphere>
+    <a-sphere class="teleport" position="-1.798 -15.300 -120" radius="2" color="#FF0000"></a-sphere>
+    <a-sphere class="teleport" position="-1.798 -15.300 -10" radius="2" color="#FF0000"></a-sphere>
+    <a-sphere class="teleport" position="50.798 -15.300 -140" radius="2" color="#FF0000"></a-sphere>
+    <a-sphere class="teleport" position="50.798 -15.300 -200" radius="2" color="#FF0000"></a-sphere>
+    <a-sphere class="teleport2" position="60.798 10 -190" radius="2" color="#FF0000" material="" geometry=""></a-sphere>
+    <a-sphere class="teleport2" position="170.798 10 -190" radius="2" color="#FF0000" material="" geometry=""></a-sphere>
 
 
     <!-- Cámara / jugador -->
@@ -115,8 +111,8 @@
   </a-scene>
 
 <script defer>
-  questionGate("#trampilla", 0, "../atico/index.html", "status_llave1");
-  catchableObject("#key1","status_llave1", "🔑");
+  questionGate("#trampilla", 0, "../atico/index.html", "status_nota 1");
+  catchableObject("#note1","status_nota 1", "📝1");
 
 </script>
 
