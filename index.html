@@ -102,13 +102,13 @@
       Un hospital que no figura en los registros.<br>
       Un paciente que <span>recordaba demasiado</span>.<br>
       Un alto mando que nunca pensó ser observado.<br><br>
-      Las notas siguen ahí.<br>
+      Las notas y los cassettes están ahí.<br>
       Esperando a alguien que escuche.<br><br>
       Esto no es una investigación.<br>
       Es una <span>reconstrucción</span>.
     </p>
 
-    <button onclick="startGame()">Abrir archivo</button>
+    <button onclick="startGame()">Empezar a jugar</button>
 
     <div class="warning">
       Algunas verdades no deberían recordarse.
@@ -117,7 +117,8 @@
 
   <script>
     function startGame() {
-      window.location.href = "./passadis/index.html?clear=clear";
+      // Redirige al siguiente espacio del juego
+      window.location.href = "./game/index.html";
     }
   </script>
 </body>
