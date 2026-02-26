@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>A-Frame — conducto.glb con teletransporte</title>
+
+  <script src="https://aframe.io/releases/1.4.1/aframe.min.js"></script>
+  <script src="https://agarci9inscastellet.github.io/scaperoom/js/scaperoom.js"></script>
+
+  <script defer>
+     if (new URLSearchParams(window.location.search).has('clear')){
+      resetStatus();
+     }
+
+  </script>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+</head>
+<body>
+  <a-scene cursor="rayOrigin: mouse" renderer="antialias: true; colorManagement: true" raycaster="objects: .aframe-clickable">
+
+    <!-- Carga del GLB -->
+    <a-assets>
+      <a-asset-item id="noteModel" src="../keys/note.glb"></a-asset-item>
+      <a-asset-item id="passModel" src="passadis.glb"></a-asset-item>
+      <a-asset-item id="trapModel" src="trapdoor.glb"></a-asset-item>
+    </a-assets>
+
+    <!-- Modelo visual -->
+    <a-entity gltf-model="#passModel"
+              position="-8 -100 -70"
+              rotation="0 90 0"
+              scale="0.25 0.25 0.25"
+              material="metalness:0; roughness:1">
+    </a-entity>
+    <a-entity 
+              id="trampilla"
+              gltf-model="#trapModel"
+              position="165 25 -210"
+              rotation="0 0 0"
+              scale="10 10 10"
+              material="metalness:0; roughness:1">
+    </a-entity>
+
+    <a-entity id="note1"
+        class="clickable" 
+        gltf-model="#noteModel"
+        position="-10 -15.300 -120"    
+        rotation="0 0 0"
+        scale="1 1 1"
+        material="metalness:0; roughness:1">
+      </a-entity>
+
+    <!-- Esferas de teletransporte -->
+    <a-sphere class="teleport2" position="0 0 -90" radius="2" color="#FF0000" material="" geometry=""></a-sphere>
+    <a-sphere class="teleport2" position="0 0 0" radius="2" color="#FF0000" material="" geometry=""></a-sphere>
+
+
+    <!-- Cámara / jugador -->
+    <a-entity id="playerRig" position="0 0 0">
+      <a-entity camera look-controls>
+        <!-- Cursor para hacer click -->
+        <a-cursor fuse="false" raycaster="objects: .teleport, .teleport2"></a-cursor>
+      </a-entity>
+    </a-entity>
+
+    <!-- Iluminación -->
+    <a-entity light="type: ambient; intensity: 0.7"></a-entity>
+    <a-entity light="type: directional; intensity: 1" position="105 -190 5" rotation="-45 45 0"></a-entity>
+    <a-entity light="type: hemisphere; skyColor: #000000; groundColor: #000000; intensity: 0.5"></a-entity>
+
+    <!-- Componente de teletransporte -->
+    <script>
+      AFRAME.registerComponent('teleport-on-click', {
+  init: function () {
+    const player = document.getElementById('playerRig');
+
+    // Teleport normal
+    const teleports = document.querySelectorAll('.teleport');
+    teleports.forEach(function (sphere) {
+      sphere.addEventListener('click', function () {
+        const pos = sphere.getAttribute('position');
+        player.setAttribute('position', `${pos.x} ${pos.y + 15} ${pos.z}`);
+      });
+    });
+
+    // Teleport diferente
+    const teleports2 = document.querySelectorAll('.teleport2');
+    teleports2.forEach(function (sphere) {
+      sphere.addEventListener('click', function () {
+        const pos = sphere.getAttribute('position');
+
+        // Teletransporte distinto
+        player.setAttribute('position', `${pos.x} ${pos.y} ${pos.z}`);
+
+        // Ejemplo extra: cambiar rotación
+        player.setAttribute('rotation', `0 0 0`);
+      });
+    });
+  }
+});
+      document.querySelector('a-scene').setAttribute('teleport-on-click', '');
+    </script>
+
+  </a-scene>
+
+<script defer>
+  questionGate("#trampilla", 1, "../atico/index.html", "status_nota 1");
+  catchableObject("#note1","status_nota 1", "📝1");
+
+</script>
+
+</body>
+</html>
+
+
