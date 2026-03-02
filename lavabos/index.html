@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8">
-    <title>Mi Escena A-Frame</title>
-    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <title>A-Frame — final.glb con teletransporte</title>
 
-      <script src="https://agarci9inscastellet.github.io/scaperoom/js/scaperoom.js"></script>
+  <script src="https://aframe.io/releases/1.4.1/aframe.min.js"></script>
+  <script src="https://agarci9inscastellet.github.io/scaperoom/js/scaperoom.js"></script>
 
   <script defer>
      if (new URLSearchParams(window.location.search).has('clear')){
@@ -16,31 +16,91 @@
 
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-  
-  </head>
-  <body>
-    <a-scene>
-      <!-- Cielo -->
-      <a-sky color="#87CEEB"></a-sky>
 
-      <!-- Suelo -->
-      <a-plane position="0 0 0" rotation="-90 0 0" width="20" height="20" color="#7BC8A4"></a-plane>
+</head>
+<body>
+  <a-scene cursor="rayOrigin: mouse" renderer="antialias: true; colorManagement: true">
 
-      <!-- Cubo -->
-      <a-box position="0 1 -3" rotation="0 45 0" color="#4CC3D9" shadow></a-box>
+    <!-- Carga del GLB -->
+    <a-assets>
+      <a-asset-item id="bathModel" src="lavabos.glb"></a-asset-item>
+      <a-asset-item id="noteModel1" src="../assets/note.glb"></a-asset-item>
+      <a-asset-item id="doorModel" src="../assets/door2.glb"></a-asset-item>
+    </a-assets>
 
-      <!-- Esfera -->
-      <a-sphere position="2 1 -5" radius="1" color="#EF2D5E" shadow></a-sphere>
+    <!-- Modelo visual -->
+    <a-entity gltf-model="#bathModel"
+              position="1550 -50 1340"
+              rotation="0 0 0"
+              scale="1 1 1"
+              material="metalness:0; roughness:1">
+    </a-entity>
 
-      <!-- Cilindro -->
-      <a-cylinder position="-2 1 -5" radius="0.5" height="2" color="#FFC65D" shadow></a-cylinder>
+    <a-entity id="note2" 
+        class="clickable" 
+        gltf-model="../assets/note.glb" 
+        position="83.17516 0.07182 53.52107" 
+        rotation="-90.00021045914971 45 0" 
+        scale="2 2 2" 
+        material="roughness: 1" 
+        visible="" 
+        style="opacity: 1;">
+      </a-entity>
 
-      <!-- Luz -->
-      <a-light type="ambient" color="#FFF"></a-light>
-      <a-light type="directional" position="0 10 0" intensity="0.5" castShadow="true"></a-light>
+    <a-entity id="door2" 
+        gltf-model="../assets/door2.glb" 
+        position="-40 -50.70453 61.39498" 
+        rotation="0 90 0" scale="0.4 0.4 1" 
+        material="roughness: 1" 
+        visible="" 
+        class="aframe-clickable">
+     </a-entity>
 
-      <!-- Cámara -->
-      <a-entity camera look-controls wasd-controls position="0 1.6 5"></a-entity>
-    </a-scene>
-  </body>
+    <!-- Esferas de teletransporte -->
+    <a-sphere class="teleport" position="80.17516 -20 0.52107" radius="3" color="#FF0000"></a-sphere>
+    <a-sphere class="teleport" position="0 -20 0" radius="3" color="#FF0000"></a-sphere>
+
+
+ 
+
+    <!-- Cámara / jugador -->
+    <a-entity id="playerRig" position="0 0 0" rotation="0 -90 0">
+      <a-entity camera look-controls>
+        <!-- Cursor para hacer click -->
+        <a-cursor fuse="false" raycaster="objects: .teleport"></a-cursor>
+      </a-entity>
+    </a-entity>
+
+    <!-- Iluminación -->
+    <a-entity light="type: ambient; intensity: 0.7"></a-entity>
+    <a-entity light="type: directional; intensity: 1" position="105 -190 5" rotation="-45 45 0"></a-entity>
+    <a-entity light="type: hemisphere; skyColor: #ffffff; groundColor: #444444; intensity: 0.5"></a-entity>
+
+    <!-- Componente de teletransporte -->
+    <script>
+      AFRAME.registerComponent('teleport-on-click', {
+        init: function () {
+          const spheres = document.querySelectorAll('.teleport');
+          const player = document.getElementById('playerRig');
+
+          spheres.forEach(function(sphere) {
+            sphere.addEventListener('click', function () {
+              const pos = sphere.getAttribute('position');
+              player.setAttribute('position', `${pos.x} ${pos.y + 20} ${pos.z}`);
+            });
+          });
+        }
+      });
+
+      document.querySelector('a-scene').setAttribute('teleport-on-click', '');
+    </script>
+
+<script defer>
+  questionGate("#door2", 0, "../inici/index.html", "status_nota 1");
+  catchableObject("#note2","status_nota 2", "📝2");
+
+</script>
+
+  </a-scene>
+</body>
 </html>

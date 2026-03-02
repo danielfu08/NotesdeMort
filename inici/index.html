@@ -24,6 +24,8 @@
     <!-- Carga del GLB -->
     <a-assets>
       <a-asset-item id="finalModel" src="final.glb"></a-asset-item>
+      <a-asset-item id="noteModel1" src="../assets/note.glb"></a-asset-item>
+      <a-asset-item id="doorModel" src="../assets/door2.glb"></a-asset-item>
     </a-assets>
 
     <!-- Modelo visual -->
@@ -33,6 +35,29 @@
               scale="1 1 1"
               material="metalness:0; roughness:1">
     </a-entity>
+
+     <a-entity id="note1"
+        class="clickable" 
+        gltf-model="#noteModel1"
+        position="-155 -15 50"    
+        rotation="0 0 0"
+        scale="2 2 2"
+        material="metalness:0; roughness:1">
+      </a-entity>
+    <a-entity id="door2" 
+        gltf-model="../assets/door2.glb" 
+        position="49.27468 -56.919 -55.102" 
+        rotation="0 90 0" 
+        scale="0.5 0.5 1" 
+        material="metalness:0; roughness:1">
+      </a-entity>
+    <a-entity id="door2-2" 
+        gltf-model="../assets/door2.glb" 
+        position="64.30275 -56.919 -150.65362" 
+        rotation="0 270 0" 
+        scale="0.5 0.5 1" 
+        material="metalness:0; roughness:1">
+      </a-entity>  
 
     <!-- Esferas de teletransporte -->
     <a-sphere class="teleport" position="33 61 -133" radius="3" color="#FF0000"></a-sphere>
@@ -75,6 +100,13 @@
 
       document.querySelector('a-scene').setAttribute('teleport-on-click', '');
     </script>
+
+<script defer>
+  questionGate("#door2", 0, "../lavabos/index.html", "status_nota 1");
+  questionGate("#door2-2", 0, "../lavabos1/index.html", "status_nota 1");
+  catchableObject("#note1","status_nota 1", "📝1");
+
+</script>
 
   </a-scene>
 </body>
