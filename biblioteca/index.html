@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>A-Frame — final.glb con puerta y llave</title>
+
+  <!-- scaperoom -->
+  <script src="https://agarci9inscastellet.github.io/scaperoom/js/scaperoom.js"></script>
+
+  <!-- aframe -->
+  <script src="https://aframe.io/releases/1.4.1/aframe.min.js"></script>
+</head>
+<body>
+
+<a-scene cursor="rayOrigin: mouse"
+         renderer="antialias: true; colorManagement: true"
+         raycaster="objects: .clickable">
+
+  <!-- Assets -->
+  <a-assets>
+
+    <a-asset-item id="finalModel" src="biblioteca.glb"></a-asset-item>
+    <a-asset-item id="muerto" src="muerto.glb"></a-asset-item>
+    <!-- puerta -->
+    <a-asset-item id="doorModel" src="../assets/door.glb"></a-asset-item>
+    
+    <!-- llave -->
+    <a-asset-item id="cassette" src="../assets/cassette.glb"></a-asset-item>
+  </a-assets>
+  <!-- escenario -->
+  <a-entity gltf-model="biblioteca.glb"
+            position="0.59245 -2.22381 0"
+            rotation="" 
+            scale="0.025 0.025 0.025">
+  </a-entity>
+  <!-- muerto -->
+  <a-entity gltf-model="muerto.glb" 
+            position="-2 -0.75 1.1"
+            rotation="0 90 0"
+            scale="0.01 0.01 0.01">
+  </a-entity>
+  <!-- PUERTA -->
+  <a-entity id="door1"
+            gltf-model="../assets/door.glb"
+            position="-1.6515 -0.26947 1.09049"
+            rotation="0 -90 0"
+            scale="0.015 0.015 0.01" 
+            class="aframe-clickable">
+  </a-entity>
+  <!-- Cassette -->
+    <a-entity id="cassette1"
+                gltf-model="../assets/cassette.glb"
+                position="-1.45 -0.32 0.11"
+                rotation="0 330 0"
+                scale="0.01 0.01 0.01"
+                animation="property: rotation; to: 0 360 0; loop: true; dur: 2000; easing: linear" 
+                class="aframe-clickable">
+    </a-entity>
+
+
+  <!-- TELEPORTS -->
+  <a-sphere class="teleport aframe-clickable" 
+            position="0.14 1.3 0.21" 
+            radius="0.05" 
+            color="#FF0000" 
+            material="" 
+            geometry="">
+        </a-sphere>
+  <a-sphere class="teleport aframe-clickable" 
+            position="-0.79 1.04 0.9" 
+            radius="0.05" 
+            color="#FF0000" 
+            material="" 
+            geometry="">
+        </a-sphere>
+  <a-sphere class="teleport aframe-clickable" 
+            position="-1 0 -0.5"
+            radius="0.05"
+            color="#FF0000"
+            material=""
+            geometry=""></a-sphere>
+  <a-sphere class="teleport aframe-clickable"
+            position="0.54628 0.17071 -0.49118"
+            radius="0.05"
+            color="#FF0000"
+            material=""
+            geometry=""></a-sphere>
+
+
+
+  <!-- jugador -->
+  <a-entity id="playerRig" 
+            position="0.55 0.17 -0.5" 
+            rotation="0 90 0">
+    <a-entity camera="" look-controls="" position="" rotation="" data-aframe-inspector-original-camera="">
+      <a-cursor fuse="false" raycaster="objects: .teleport, .clickable" material="" cursor="" geometry=""></a-cursor>
+    </a-entity>
+  </a-entity>
+
+
+
+  <!-- luces -->
+  <a-entity light="type: ambient; intensity: 0.7"></a-entity>
+  <a-entity light="type: directional; intensity: 1"
+            position="105 -190 5"
+            rotation="-45 45 0"></a-entity>
+
+</a-scene>
+
+
+<!-- TELEPORT -->
+<script>
+
+AFRAME.registerComponent('teleport-on-click', {
+
+  init: function () {
+
+    const spheres = document.querySelectorAll('.teleport');
+    const player = document.getElementById('playerRig');
+
+    spheres.forEach(function(sphere) {
+
+      sphere.addEventListener('click', function () {
+
+        const pos = sphere.getAttribute('position');
+
+        player.setAttribute('position',
+          `${pos.x} ${pos.y} ${pos.z}`);
+
+      });
+
+    });
+
+  }
+
+});
+
+document.querySelector('a-scene')
+        .setAttribute('teleport-on-click', '');
+
+</script>
+
+
+</body>
+</html>
