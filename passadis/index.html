@@ -53,6 +53,14 @@
         material="metalness:0; roughness:1">
       </a-entity>
 
+    <a-entity id="door3" 
+    gltf-model="../assets/door3.glb" 
+    position="11.01031 -22.62749 -5.92073" 
+    rotation="0 90 0" 
+    scale="0.09 0.09 0.07" 
+    material="metalness:0; roughness:1">
+      </a-entity>
+
     <!-- Esferas de teletransporte -->
     <a-sphere class="teleport" position="-1.798 -15.300 -120" radius="2" color="#FF0000"></a-sphere>
     <a-sphere class="teleport" position="-1.798 -15.300 -10" radius="2" color="#FF0000"></a-sphere>
@@ -111,6 +119,7 @@
 <script defer>
   questionGate("#trampilla2", 0, "../conductos/index.html", "status_nota 7");
   catchableObject("#note7","status_nota 7", "📝7");
+  questionGate("#door3", 0, "../inici/index.html", "status_nota 2");
 
 </script>
 
