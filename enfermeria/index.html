@@ -25,6 +25,7 @@
     <a-assets>
       <a-asset-item id="noteModel4" src="../assets/note.glb"></a-asset-item>
       <a-asset-item id="enfModel" src="infermeria.glb"></a-asset-item>
+      <a-asset-item id="doorModel" src="../assets/door6.glb"></a-asset-item>
       
     </a-assets>
 
@@ -44,6 +45,22 @@
         scale="1 1 1"
         material="metalness:0; roughness:1">
       </a-entity>
+
+    <a-entity id="door6" 
+        gltf-model="#doorModel" 
+        position="-0.61095 -93.06797 40.0186"    
+        rotation="0 180 0" 
+        scale="55 60 55" 
+        material="metalness:0; roughness:1">
+      </a-entity>
+
+    <a-entity id="door6-2" 
+        gltf-model="#doorModel" 
+        position="-196.16752 -92.93245 -37.30732"    
+        rotation="0 270 0" 
+        scale="55 60 55" 
+        material="metalness:0; roughness:1">
+      </a-entity> 
 
     <!-- Esferas de teletransporte -->
     <a-sphere class="teleport" position="0 -15 0" radius="2" color="#FF0000"></a-sphere>
@@ -89,6 +106,8 @@
 
 <script defer>
   catchableObject("#note4","status_nota 4", "📝4");
+  questionGate("#door6", 0, "../passadis/index.html", "status_nota 3");
+  questionGate("#door6-2", 0, "../preso/index.html", "status_nota 4");
 
 
 </script>
