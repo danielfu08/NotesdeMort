@@ -12,9 +12,8 @@
 </head>
 <body>
 
-<a-scene cursor="rayOrigin: mouse"
-         renderer="antialias: true; colorManagement: true"
-         raycaster="objects: .clickable">
+<a-scene a-scene cursor="rayOrigin: mouse" 
+          renderer="antialias: true; colorManagement: true>
 
   <!-- Assets -->
   <a-assets>
@@ -26,35 +25,76 @@
     <a-asset-item id="cassette" src="../assets/cassette.glb"></a-asset-item>
   </a-assets>
  <!-- escenario -->
-  <a-entity gltf-model="room.glb" position="0.59245 -2.22381 0" rotation="" scale="0.025 0.025 0.025">
+  <a-entity gltf-model="room.glb" 
+            position="0.59245 -2.22381 0" 
+            rotation="" 
+            scale="0.025 0.025 0.025">
   </a-entity>
-  <!-- muerto -->
-  
+
   <!-- PUERTA -->
-  <a-entity id="door1" gltf-model="../assets/door.glb" position="-1.42414 -0.427 2.03483" rotation="0 180 0" scale="0.021 0.02 0.06" class="aframe-clickable">
+  <a-entity id="door1" 
+            gltf-model="../assets/door.glb" 
+            position="-1.42 -0.42 2.03" 
+            rotation="0 180 0" 
+            scale="0.021 0.02 0.06" 
+            class="aframe-clickable">
   </a-entity>
   <!-- Cassette -->
-    <a-entity id="cassette1" gltf-model="../assets/cassette.glb" position="-2.3167 1.03568 -2.27962" rotation="0 354.0179999999888 0" scale="0.01 0.01 0.01" animation="property: rotation; to: 0 360 0; loop: true; dur: 2000; easing: linear" class="aframe-clickable">
+    <a-entity id="cassette1" 
+                gltf-model="../assets/cassette.glb" 
+                position="-2.3167 1.03568 -2.27962" 
+                rotation="0 354.0179999999888 0" 
+                scale="0.01 0.01 0.01" 
+                animation="property: rotation; to: 0 360 0; loop: true; dur: 2000; easing: linear" 
+                class="aframe-clickable">
     </a-entity>
 
 
   <!-- TELEPORTS -->
- <a-sphere class="teleport aframe-clickable" position="0.14 1.3 -1.99851" radius="0.05" color="#FF0000" material="" geometry="">
+    <a-sphere class="teleport aframe-clickable" 
+                position="0.14 1.3 -1.99851" 
+                radius="0.05" color="#FF0000" 
+                material="" 
+                geometry="">
+            </a-sphere>
+        <a-sphere class="teleport aframe-clickable" 
+                position="-1.30215 1.65069 1.9573" 
+                radius="0.05" 
+                color="#FF0000" 
+                material="" 
+                geometry="">
         </a-sphere>
-  <a-sphere class="teleport aframe-clickable" position="-1.30215 1.65069 1.9573" radius="0.05" color="#FF0000" material="" geometry="">
-        </a-sphere>
-  <a-sphere class="teleport aframe-clickable" position="-1.80703 0.07665 -0.37165" radius="0.05" color="#FF0000" material="" geometry=""></a-sphere>
-  <a-sphere class="teleport aframe-clickable" position="-2.04599 0.36328 1.80944" radius="0.05" color="#FF0000" material="" geometry=""></a-sphere>
-
-
-
-
+    <a-sphere class="teleport aframe-clickable" 
+                position="-1.80703 0.07665 -0.37165" 
+                radius="0.05" 
+                color="#FF0000" 
+                material="" 
+                geometry="">
+            </a-sphere>
+    <a-sphere class="teleport aframe-clickable" 
+                position="-2.04599 0.36328 1.80944" 
+                radius="0.05" 
+                color="#FF0000" 
+                material="" 
+                geometry="">
+            </a-sphere>
   <!-- jugador -->
- <a-entity id="playerRig" position="-1.14339 0.61543 1.1323" rotation="">
-    <a-entity camera="" look-controls="" position="" rotation="" data-aframe-inspector-original-camera="">
-      <a-cursor fuse="false" raycaster="objects: .teleport, .clickable" material="" cursor="" geometry=""></a-cursor>
+    <a-entity id="playerRig" 
+                position="-1.14339 0.61543 1.1323" 
+                rotation="0 0 0">
+        <a-entity camera="" 
+                    look-controls="" 
+                    position="" 
+                    rotation="" 
+                    data-aframe-inspector-original-camera="">
+        <a-cursor fuse="false" 
+                    raycaster="objects: .teleport, .clickable" 
+                    material="" 
+                    cursor="" 
+                    geometry="">
+                </a-cursor>
+        </a-entity>
     </a-entity>
-  </a-entity>
 
 
 
