@@ -9,17 +9,25 @@
 
   <!-- aframe -->
   <script src="https://aframe.io/releases/1.4.1/aframe.min.js"></script>
+
+  <script defer>
+     if (new URLSearchParams(window.location.search).has('?clear')){
+      resetStatus();
+     }
+
+  </script>
+
 </head>
 <body>
 
 <a-scene a-scene cursor="rayOrigin: mouse" 
-          renderer="antialias: true; colorManagement: true>
+          renderer="antialias: true; colorManagement: true">
 
   <!-- Assets -->
   <a-assets>
     <a-asset-item id="finalModel" src="room.glb"></a-asset-item>
     <!-- puerta -->
-    <a-asset-item id="doorModel" src="../assets/door.glb"></a-asset-item>
+    <a-asset-item id="doorModel" src="../assets/door5.glb"></a-asset-item>
     
     <!-- llave -->
     <a-asset-item id="cassette" src="../assets/cassette.glb"></a-asset-item>
@@ -32,11 +40,11 @@
   </a-entity>
 
   <!-- PUERTA -->
-  <a-entity id="door1" 
-            gltf-model="../assets/door.glb" 
-            position="-1.42 -0.42 2.03" 
+  <a-entity id="door9" 
+            gltf-model="#doorModel" 
+            position="-1.16833 -0.6353 2.38407" 
             rotation="0 180 0" 
-            scale="0.021 0.02 0.06" 
+            scale="0.75 0.85 0.75" 
             class="aframe-clickable">
   </a-entity>
   <!-- Cassette -->
@@ -140,6 +148,9 @@ document.querySelector('a-scene')
 
 </script>
 
+<script defer>
+  questionGate("#door9", 0, "../biblioteca/index.html", "status_nota 6");
+</script>
 
 </body>
 </html>

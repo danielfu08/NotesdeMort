@@ -2,13 +2,13 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>A-Frame — conducto.glb con teletransporte</title>
+  <title>A-Frame — passadis.glb con teletransporte</title>
 
   <script src="https://aframe.io/releases/1.4.1/aframe.min.js"></script>
   <script src="https://agarci9inscastellet.github.io/scaperoom/js/scaperoom.js"></script>
 
   <script defer>
-     if (new URLSearchParams(window.location.search).has('clear')){
+     if (new URLSearchParams(window.location.search).has('?clear')){
       resetStatus();
      }
 
@@ -19,57 +19,72 @@
 
 </head>
 <body>
-  <a-scene cursor="rayOrigin: mouse" renderer="antialias: true; colorManagement: true" raycaster="objects: .aframe-clickable">
+  <a-scene cursor="rayOrigin: mouse" renderer="antialias: true; colorManagement: true">
 
     <!-- Carga del GLB -->
     <a-assets>
-      <a-asset-item id="noteModel" src="../assets/note.glb"></a-asset-item>
+      <a-asset-item id="noteModel3" src="../assets/note.glb"></a-asset-item>
       <a-asset-item id="passModel" src="passadis.glb"></a-asset-item>
-      <a-asset-item id="trapModel" src="../assets/trapdoor.glb"></a-asset-item>
-      <a-asset-item id="conductrap" src="../assets/trapdoor2.glb"></a-asset-item>
+      <a-asset-item id="trapModel2" src="../assets/trapdoor2.glb"></a-asset-item>
     </a-assets>
 
     <!-- Modelo visual -->
     <a-entity gltf-model="#passModel"
-              position="-8 -100 -70"
-              rotation="0 90 0"
+              position="151.796 -89 -200"
+              rotation="0 0 0"
               scale="0.25 0.25 0.25"
               material="metalness:0; roughness:1">
     </a-entity>
     <a-entity 
-              id="trampilla"
-              gltf-model="#trapModel"
-              position="-16 15 -100"
-              rotation="0 -5 0"
-              scale="10 10 10"
-              material="metalness:0; roughness:1">
-    </a-entity>
-
-    <a-entity 
               id="trampilla2"
-              gltf-model="#conductrap"
-              position="0.5 -0.8 20"
-              rotation="90 0 0"
-              scale="5.5 5 5.5"
+              gltf-model="#trapModel2"
+              position="61.3 10.0 -191.3"
+              rotation="-90 180 90"
+              scale="5 5 5"
               material="metalness:0; roughness:1">
     </a-entity>
 
-    <a-entity id="note7"
+    <a-entity id="note3"
         class="clickable" 
-        gltf-model="#noteModel"
-        position="-10 -15.300 -120"    
-        rotation="0 0 0"
-        scale="1 1 1"
+        gltf-model="#noteModel3"
+        position="-14.32241 10.14594 -115.2849"    
+        rotation="-90 -90 0"
+        scale="0.5 0.5 0.5"
         material="metalness:0; roughness:1">
       </a-entity>
 
+    <a-entity id="door3" 
+    gltf-model="../assets/door3.glb" 
+    position="11.01031 -22.62749 -5.92073" 
+    rotation="0 90 0" 
+    scale="0.09 0.09 0.07" 
+    material="metalness:0; roughness:1">
+      </a-entity>
+
+    <a-entity id="door4" 
+    gltf-model="../assets/door4.glb" 
+    position="-16.66232 -22.62749 -128.74757" 
+    rotation="0 90 0" 
+    scale="0.12 0.12 0.12" 
+    material="metalness:0; roughness:1">
+      </a-entity>
+   <a-entity id="door4-2" 
+    gltf-model="../assets/door4.glb" 
+    position="53.86637 -22.62749 -219.58258" 
+    rotation="0 0 0" 
+    scale="0.12 0.12 0.12" 
+    material="metalness:0; roughness:1">
+      </a-entity>
+
     <!-- Esferas de teletransporte -->
-    <a-sphere class="teleport2" position="0 0 -90" radius="2" color="#FF0000" material="" geometry=""></a-sphere>
-    <a-sphere class="teleport2" position="0 0 0" radius="2" color="#FF0000" material="" geometry=""></a-sphere>
+    <a-sphere class="teleport" position="-1.798 -15.300 -120" radius="2" color="#FF0000"></a-sphere>
+    <a-sphere class="teleport" position="-1.798 -15.300 -10" radius="2" color="#FF0000"></a-sphere>
+    <a-sphere class="teleport" position="50.798 -15.300 -140" radius="2" color="#FF0000"></a-sphere>
+    <a-sphere class="teleport" position="50.798 -15.300 -200" radius="2" color="#FF0000"></a-sphere>
 
 
     <!-- Cámara / jugador -->
-    <a-entity id="playerRig" position="0 0 0">
+    <a-entity id="playerRig" position="50.798 0 -200">
       <a-entity camera look-controls>
         <!-- Cursor para hacer click -->
         <a-cursor fuse="false" raycaster="objects: .teleport, .teleport2"></a-cursor>
@@ -117,9 +132,11 @@
   </a-scene>
 
 <script defer>
-  questionGate("#trampilla", 0, "../atico/index.html");
-  questionGate("#trampilla2", 0, "../passadis/index2.html");
-  catchableObject("#note7","status_nota 7", "📝7");
+  catchableObject("#note3","status_nota 3", "📝3");
+  questionGate("#trampilla2", 0, "../conductos/index.html", "status_nota 7");
+  questionGate("#door3", 0, "../inici/index.html", "status_nota 2");
+  questionGate("#door4", 0, "../enfermeria/index.html", "status_nota 3");
+  questionGate("#door4-2", 0, "../biblioteca/index.html", "status_nota 5");
 
 </script>
 
