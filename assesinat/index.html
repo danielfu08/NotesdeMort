@@ -31,6 +31,8 @@
     
     <!-- llave -->
     <a-asset-item id="cassette" src="../assets/cassette.glb"></a-asset-item>
+
+    <a-asset-item id="noteModel7" src="../assets/note.glb"></a-asset-item>
   </a-assets>
  <!-- escenario -->
   <a-entity gltf-model="room.glb" 
@@ -55,6 +57,15 @@
                 scale="1 1 1" 
                 animation="property: rotation; to: 0 360 0; loop: true; dur: 2000; easing: linear" 
                 class="aframe-clickable">
+    </a-entity>
+
+   <a-entity id="note7"
+        class="clickable" 
+        gltf-model="#noteModel7"
+        position="-2.4992 0.25267 2.025"    
+        rotation="0 0 0"
+        scale="0.025 0.025 0.025"
+        material="metalness:0; roughness:1">
     </a-entity>
 
 
@@ -149,7 +160,9 @@ document.querySelector('a-scene')
 </script>
 
 <script defer>
+  catchableObject("#note7","status_nota 7", "📝7");
   questionGate("#door9", 0, "../biblioteca/index.html", "status_nota 6");
+
 </script>
 
 </body>
