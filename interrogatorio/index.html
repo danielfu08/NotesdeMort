@@ -4,22 +4,28 @@
   <meta charset="UTF-8" />
   <title>A-Frame — final.glb con puerta y llave</title>
 
-  <!-- scaperoom -->
+  <script src="https://aframe.io/releases/1.4.1/aframe.min.js"></script>
   <script src="https://agarci9inscastellet.github.io/scaperoom/js/scaperoom.js"></script>
 
-  <!-- aframe -->
-  <script src="https://aframe.io/releases/1.4.1/aframe.min.js"></script>
+  <script defer>
+     if (new URLSearchParams(window.location.search).has('clear')){
+      resetStatus();
+     }
+
+  </script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
 </head>
 <body>
 
 <a-scene a-scene cursor="rayOrigin: mouse" 
-          renderer="antialias: true; colorManagement: true>
+          renderer="antialias: true; colorManagement: true">
 
   <!-- Assets -->
   <a-assets>
     <a-asset-item id="finalModel" src= "interrogati.glb"></a-asset-item>
     <!-- puerta -->
-    <a-asset-item id="doorModel" src="../assets/door.glb"></a-asset-item>
     
     <!-- llave -->
     <a-asset-item id="cassette" src="../assets/cassette.glb"></a-asset-item>
@@ -31,13 +37,6 @@
             scale="3 3 3">
   </a-entity>
 
-  <!-- PUERTA -->
-  <a-entity id="door1" 
-            gltf-model="../assets/door.glb" 
-            position="-4.5 -0.42 0.18" 
-            rotation="0 180 0" 
-            scale="0.021 0.02 0.06" 
-            class="aframe-clickable">
   </a-entity>
   <!-- Cassette -->
     <a-entity id="cassette1" 
