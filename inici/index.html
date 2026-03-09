@@ -117,5 +117,54 @@
   questionGate("#door3", 0, "../passadis/index.html", "status_nota 2");
 </script>
   </a-scene>
+
+  <!-- POPUP NOTA -->
+  <div id="notePopup" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; 
+       background: rgba(0,0,0,0.9); justify-content:center; align-items:center; z-index:1000; flex-direction:column;">
+    <div style="background:#111; color:#cfcfcf; padding:30px; max-width:600px; text-align:center; border:1px solid #2a2a2a; font-family: 'Special Elite', monospace;">
+      <h1 id="noteTitle">NOTA</h1>
+      <p id="noteText"></p>
+      <button onclick="document.getElementById('notePopup').style.display='none'">Tancar</button>
+    </div>
+  </div>
+
+  <!-- SCRIPT NOTAS JSON -->
+  <script>
+    let notesData = {};
+
+    fetch('../notes.json')
+      .then(res => res.json())
+      .then(data => {
+        notesData = data;
+        // Una vez cargadas las notas, asignar listeners a cada nota
+        document.querySelectorAll('.clickable').forEach(el => {
+          el.addEventListener('click', function(){
+            const id = el.id;
+            const note = notesData[id];
+            if(note){
+              openNote(note.title, note.text);
+            } else {
+              openNote('NOTA', 'Contingut no disponible.');
+            }
+          });
+        });
+      })
+      .catch(err => console.error('Error cargando notes.json', err));
+
+    function openNote(title,text){
+      document.getElementById("noteTitle").innerHTML = title;
+      document.getElementById("noteText").innerHTML = text;
+      document.getElementById("notePopup").style.display = "flex";
+    }
+  </script>
+
+  <!-- Scaperoom.js -->
+  <script defer>
+    questionGate("#door2", 0, "../lavabos/index.html", "status_nota 1");
+    questionGate("#door3", 0, "../passadis/index.html", "status_nota 2");
+    catchableObject("#note1","status_nota 1", "📝1");
+    catchableObject("#note2","status_nota 2", "📝2");
+    catchableObject("#note3","status_nota 3", "📝3");
+  </script>
 </body>
 </html>
