@@ -25,6 +25,7 @@
     <a-assets>
       <a-asset-item id="aticModel" src="atic.glb"></a-asset-item>
       <a-asset-item id="doorModel" src="../assets/door.glb"></a-asset-item>
+      <a-asset-item id="noteModel" src="../assets/note.glb"></a-asset-item>
     </a-assets>
 
     <!-- Modelo visual -->
@@ -42,10 +43,22 @@
               material="metalness:0; roughness:1">
     </a-entity>
 
+    <a-entity id="note8"
+              gltf-model="#noteModel"
+              position="139.11433 75.19763 -80.41505"
+              rotation="90 0 90"
+              scale="0.75 0.75 0.75"
+              material="metalness:0; roughness:1">
+    </a-entity>
+
     <!-- Esferas de teletransporte -->
     <a-sphere class="teleport" position="0 -15.300 0" radius="2" color="#FF0000"></a-sphere>
     <a-sphere class="teleport" position="0 68.300 -130" radius="2" color="#FF0000"></a-sphere>
     <a-sphere class="teleport" position="40 68.300 -150" radius="2" color="#FF0000"></a-sphere>
+    <a-sphere class="teleport" position="130 68.300 -150" radius="2" color="#FF0000"></a-sphere>
+    <a-sphere class="teleport" position="130 68.300 -80" radius="2" color="#FF0000"></a-sphere>
+    <a-sphere class="teleport" position="40 68.300 -80" radius="2" color="#FF0000"></a-sphere>
+
 
 
 
@@ -101,7 +114,8 @@
   </a-scene>
 
 <script defer>
-  questionGate("#door", 0, "../conductos/index.html", "status_nota 1");
+  catchableObject("#note8","status_nota 8", "📝8");
+  questionGate("#door", 0, "../conductos/index.html", "status_nota 7");
 
 </script>
 

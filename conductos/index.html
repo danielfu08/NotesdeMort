@@ -19,7 +19,7 @@
 
 </head>
 <body>
-  <a-scene cursor="rayOrigin: mouse" renderer="antialias: true; colorManagement: true" raycaster="objects: .aframe-clickable">
+  <a-scene cursor="rayOrigin: mouse" renderer="antialias: true; colorManagement: true">
 
     <!-- Carga del GLB -->
     <a-assets>
@@ -53,15 +53,6 @@
               scale="5.5 5 5.5"
               material="metalness:0; roughness:1">
     </a-entity>
-
-    <a-entity id="note7"
-        class="clickable" 
-        gltf-model="#noteModel"
-        position="-10 -15.300 -120"    
-        rotation="0 0 0"
-        scale="1 1 1"
-        material="metalness:0; roughness:1">
-      </a-entity>
 
     <!-- Esferas de teletransporte -->
     <a-sphere class="teleport2" position="0 0 -90" radius="2" color="#FF0000" material="" geometry=""></a-sphere>
@@ -117,9 +108,8 @@
   </a-scene>
 
 <script defer>
-  questionGate("#trampilla", 0, "../atico/index.html");
-  questionGate("#trampilla2", 0, "../passadis/index2.html");
-  catchableObject("#note7","status_nota 7", "📝7");
+  questionGate("#trampilla", 0, "../atico/index.html", "status_nota 7");
+  questionGate("#trampilla2", 0, "../passadis/index2.html", "status_nota 7");
 
 </script>
 
