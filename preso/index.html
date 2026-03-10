@@ -2,30 +2,22 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>A-Frame — passadis.glb con teletransporte</title>
-
+  <title>A-Frame — Corregido</title>
   <script src="https://aframe.io/releases/1.4.1/aframe.min.js"></script>
   <script src="https://agarci9inscastellet.github.io/scaperoom/js/scaperoom.js"></script>
-
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
   <script>
-     // Registro del componente antes de que se cargue la escena
      AFRAME.registerComponent('teleport-on-click', {
        init: function () {
          const player = document.getElementById('playerRig');
          this.el.addEventListener('click', () => {
            const pos = this.el.getAttribute('position');
-           // Ajustamos la altura a 1.6 (altura de ojos normal) en lugar de +15
            player.setAttribute('position', {x: pos.x, y: 1.6, z: pos.z});
          });
        }
      });
-
-     if (new URLSearchParams(window.location.search).has('clear')){
-      resetStatus();
-     }
   </script>
 </head>
 <body>
@@ -39,45 +31,27 @@
     <a-asset-item id="note5Model" src="../assets/note.glb"></a-asset-item>
   </a-assets>
 
-<a-scene cursor="rayOrigin: mouse" 
-            renderer="antialias: true; colorManagement: true">
- 
-   <!-- Assets -->
-  <a-assets>
+  <a-entity gltf-model="#finalModel" position="-0.95 0.99 0.54" class="aframe-clickable"></a-entity>
 
- <!-- escenario -->
- <a-entity gltf-model="preso.glb" position="-0.95608 0.99227 0.5498" rotation="" scale="" class="aframe-clickable">
- </a-entity>
-  <!-- PUERTA -->
-<a-entity id="door7" gltf-model="../assets/door7.glb" position="-0.827 -0.26584 -0.09507" rotation="0 -180 0" scale="0.5 0.6 0.4" class="aframe-clickable">
- </a-entity>
-  <!-- Cassette -->
-  <a-entity id="cassette1" gltf-model="../assets/cassette.glb" position="-0.4 0.4334 1.09108" rotation="0 360 0" scale="" animation="property: rotation; to: 0 360 0; loop: true; dur: 2000; easing: linear" class="aframe-clickable">
- </a-entity>
-  <!-- Nota 5 -->
-      <a-entity id="note5"
-        class="clickable" 
-        gltf-model="#note5"
-        position="-0.42353 0.72109 -0.71572"    
-        rotation="90 90 0"
-        scale="0.05 0.05 0.05"
-        material="metalness:0; roughness:1">
-      </a-entity>
+  <a-entity id="door7" gltf-model="#doorModel" position="-0.82 -0.26 -0.09" rotation="0 -180 0" scale="0.5 0.6 0.4" class="aframe-clickable"></a-entity>
 
-  <a-entity id="playerRig" position="0 0 0">
-    <a-entity camera look-controls>
+  <a-entity id="cassette1" gltf-model="#cassetteModel" position="-0.4 0.43 1.09" animation="property: rotation; to: 0 360 0; loop: true; dur: 2000; easing: linear" class="aframe-clickable"></a-entity>
+
+  <a-entity id="note5" class="clickable" gltf-model="#note5Model" position="-0.42 0.72 -0.71" rotation="90 90 0" scale="0.05 0.05 0.05"></a-entity>
+
+  <a-entity id="playerRig" position="0 1.2 0">
+    <a-entity id="camera" camera look-controls>
       <a-cursor fuse="false" raycaster="objects: .clickable, .aframe-clickable"></a-cursor>
     </a-entity>
   </a-entity>
 
   <a-entity light="type: ambient; intensity: 0.7"></a-entity>
-  <a-entity light="type: directional; intensity: 1" position="105 -190 5"></a-entity>
+  <a-entity light="type: directional; intensity: 1" position="1 1 1"></a-entity>
 
 </a-scene>
 
 <script>
-  // Inicialización de lógica de escape room
-  // Asegúrate de que los IDs coincidan exactamente
+  // Estos selectores deben coincidir con los IDs de las <a-entity>
   catchableObject("#note5", "status_nota 5", "📝5");
   questionGate("#door7", 0, "../enfermeria/index.html", "status_nota 4");
 </script>
