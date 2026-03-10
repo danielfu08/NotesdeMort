@@ -26,57 +26,30 @@
   <a-assets>
     <a-asset-item id="finalModel" src= "interrogati.glb"></a-asset-item>
     <!-- puerta -->
-    
-    <!-- llave -->
-    <a-asset-item id="cassette" src="../assets/cassette.glb"></a-asset-item>
+    <a-asset-item id="trapModel2" src="../assets/trapdoor2.glb"></a-asset-item>
+  
   </a-assets>
  <!-- escenario -->
   <a-entity gltf-model="interrogati.glb" 
-            position="-2.3 -1 0" 
+            position="-6 -1 -2" 
             rotation="" 
             scale="3 3 3">
   </a-entity>
 
   </a-entity>
   <!-- Cassette -->
-    <a-entity id="cassette1" 
-                gltf-model="../assets/cassette.glb" 
-                position="-2.3167 1.03568 -2.27962" 
-                rotation="0 354.0179999999888 0" 
-                scale="1 1 1" 
-                animation="property: rotation; to: 0 360 0; loop: true; dur: 2000; easing: linear" 
+    <a-entity id="trapdoor2" 
+                gltf-model="../assets/trapdoor2.glb" 
+                position="-4.07954 0.22108 0.95367" 
+                rotation="90 90 90" 
+                scale="0.25 0.25 0.25" 
                 class="aframe-clickable">
     </a-entity>
 
 
   <!-- TELEPORTS -->
-    <a-sphere class="teleport aframe-clickable" 
-                position="-4.6 -0.75 0.48" 
-                radius="0.05" color="#FF0000" 
-                material="" 
-                geometry="">
-            </a-sphere>
-        <a-sphere class="teleport aframe-clickable" 
-                position="-4.4 2.4 2.5" 
-                radius="0.05" 
-                color="#FF0000" 
-                material="" 
-                geometry="">
-        </a-sphere>
-    <a-sphere class="teleport aframe-clickable" 
-                position="-2.6 0.307 -2.05" 
-                radius="0.05" 
-                color="#FF0000" 
-                material="" 
-                geometry="">
-            </a-sphere>
-    <a-sphere class="teleport aframe-clickable" 
-                position="-2.19 1.35 1.80" 
-                radius="0.05" 
-                color="#FF0000" 
-                material="" 
-                geometry="">
-            </a-sphere>
+    <a-sphere class="teleport aframe-clickable" position="-4.6 -0.75 0.48" radius="0.05" color="#FF0000"  material=""  geometry="">  </a-sphere>
+     
   <!-- jugador -->
     <a-entity id="playerRig" 
                 position="-4.6 -0.75 0.48" 
@@ -139,6 +112,12 @@ document.querySelector('a-scene')
 
 </script>
 
+<script defer>
+  questionGate("#trapdoor2", 0, "../conductos/index.html", "status_nota 9");
+  catchableObject("#note10","status_nota 10", "📝10");
+
+
+</script>
 
 </body>
 </html>

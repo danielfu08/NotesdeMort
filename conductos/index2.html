@@ -25,7 +25,6 @@
     <a-assets>
       <a-asset-item id="noteModel" src="../assets/note.glb"></a-asset-item>
       <a-asset-item id="passModel" src="passadis.glb"></a-asset-item>
-      <a-asset-item id="trapModel" src="../assets/trapdoor.glb"></a-asset-item>
       <a-asset-item id="conductrap" src="../assets/trapdoor2.glb"></a-asset-item>
     </a-assets>
 
@@ -36,40 +35,31 @@
               scale="0.25 0.25 0.25"
               material="metalness:0; roughness:1">
     </a-entity>
+    
     <a-entity 
-              id="trampilla"
-              gltf-model="#trapModel"
-              position="-16 15 -100"
-              rotation="0 -5 0"
-              scale="10 10 10"
-              material="metalness:0; roughness:1">
-    </a-entity>
-
-    <a-entity 
-              id="trampilla2"
-              gltf-model="#conductrap"
-              position="0.5 -0.8 20"
-              rotation="90 0 0"
-              scale="5.5 5 5.5"
-              material="metalness:0; roughness:1">
-    </a-entity>
-
-        <a-entity 
               id="trampilla3"
               gltf-model="#conductrap"
-              position="0 -0.8 -100"
+              position="0 -0.8 -102"
               rotation="90 0 0"
               scale="8 5 5.5"
               material="metalness:0; roughness:1">
     </a-entity>
 
+    <a-entity 
+              id="trampilla4"
+              gltf-model="#conductrap"
+              position="30 -0.8 -127"
+              rotation="90 0 90"
+              scale="8 5 5.5"
+              material="metalness:0; roughness:1">
+    </a-entity>
+
     <!-- Esferas de teletransporte -->
-    <a-sphere class="teleport" position="0 0 -90" radius="2" color="#FF0000" material="" geometry=""></a-sphere>
-    <a-sphere class="teleport" position="0 0 0" radius="2" color="#FF0000" material="" geometry=""></a-sphere>
+    <a-sphere class="teleport" position="0 0 -130" radius="2" color="#FF0000" material="" geometry=""></a-sphere>
 
 
     <!-- Cámara / jugador -->
-    <a-entity id="playerRig" position="0 0 0">
+    <a-entity id="playerRig" position="0 0 -110">
       <a-entity camera look-controls>
         <!-- Cursor para hacer click -->
         <a-cursor fuse="false" raycaster="objects: .teleport, .teleport2"></a-cursor>
@@ -103,9 +93,10 @@
   </a-scene>
 
 <script defer>
-  questionGate("#trampilla", 0, "../atico/index.html", "status_nota 7");
-  questionGate("#trampilla2", 0, "../passadis/index2.html", "status_nota 7");
-  questionGate("#trampilla3", 0, "index2.html", "status_nota 8");
+  questionGate("#trampilla3", 0, "index.html", "status_nota 8");
+  
+  questionGate("#trampilla4", 0, "../interrogatorio/index.html", "status_nota 9");
+
 
 
 </script>
