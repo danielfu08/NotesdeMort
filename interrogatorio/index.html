@@ -27,6 +27,8 @@
     <a-asset-item id="finalModel" src= "interrogati.glb"></a-asset-item>
     <!-- puerta -->
     <a-asset-item id="trapModel2" src="../assets/trapdoor2.glb"></a-asset-item>
+      <!-- nota -->
+    <a-asset-item id="note10Model" src="../assets/note.glb"></a-asset-item>
   
   </a-assets>
  <!-- escenario -->
@@ -46,9 +48,25 @@
                 class="aframe-clickable">
     </a-entity>
 
+        <a-entity id="note10" 
+                 class="clickable" 
+                 gltf-model="#note10Model" 
+                 position="-7.59516 -0.39034 -4.97679" 
+                 rotation="90 0 0" 
+                 scale="0.025 0.025 0.025">
+        </a-entity>
+
 
   <!-- TELEPORTS -->
-    <a-sphere class="teleport aframe-clickable" position="-4.6 -0.75 0.48" radius="0.05" color="#FF0000"  material=""  geometry="">  </a-sphere>
+    <a-sphere class="teleport aframe-clickable" position="-7 -1.5 0.5" radius="0.1" color="#FF0000"  material=""  geometry="">  </a-sphere>
+    <a-sphere class="teleport aframe-clickable" position="-4.6 -1.5 0.5" radius="0.1" color="#FF0000"  material=""  geometry="">  </a-sphere>
+    <a-sphere class="teleport aframe-clickable" position="-7.5 -1.5 -2" radius="0.1" color="#FF0000"  material=""  geometry="">  </a-sphere>
+    <a-sphere class="teleport aframe-clickable" position="-4.6 -1.5 -3.5" radius="0.1" color="#FF0000"  material=""  geometry="">  </a-sphere>
+    <a-sphere class="teleport aframe-clickable" position="-7 -1.5 -3.5" radius="0.1" color="#FF0000"  material=""  geometry="">  </a-sphere>
+
+
+
+
      
   <!-- jugador -->
     <a-entity id="playerRig" 
@@ -97,7 +115,7 @@ AFRAME.registerComponent('teleport-on-click', {
         const pos = sphere.getAttribute('position');
 
         player.setAttribute('position',
-          `${pos.x} ${pos.y} ${pos.z}`);
+          `${pos.x} ${pos.y+0.748} ${pos.z}`);
 
       });
 
