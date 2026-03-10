@@ -7,29 +7,40 @@
   <script src="https://aframe.io/releases/1.4.1/aframe.min.js"></script>
   <script src="https://agarci9inscastellet.github.io/scaperoom/js/scaperoom.js"></script>
 
-  <script defer>
-     if (new URLSearchParams(window.location.search).has('?clear')){
-      resetStatus();
-     }
-
-  </script>
-
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
+  <script>
+     // Registro del componente antes de que se cargue la escena
+     AFRAME.registerComponent('teleport-on-click', {
+       init: function () {
+         const player = document.getElementById('playerRig');
+         this.el.addEventListener('click', () => {
+           const pos = this.el.getAttribute('position');
+           // Ajustamos la altura a 1.6 (altura de ojos normal) en lugar de +15
+           player.setAttribute('position', {x: pos.x, y: 1.6, z: pos.z});
+         });
+       }
+     });
+
+     if (new URLSearchParams(window.location.search).has('clear')){
+      resetStatus();
+     }
+  </script>
 </head>
 <body>
-  <a-scene cursor="rayOrigin: mouse" renderer="antialias: true; colorManagement: true">
 
-    <!-- Carga del GLB -->
- <a-assets>
-   <a-asset-item id="finalModel" src="preso.glb"></a-asset-item>
-   <a-asset-item id="doorModel" src="../assets/door7.glb"></a-asset-item>
-   <a-asset-item id="cassette" src="../assets/cassette.glb"></a-asset-item>
-   <a-asset-item id="note5" src="../assets/note.glb"></a-asset-item>
- </a-assets>
+<a-scene cursor="rayOrigin: mouse" renderer="antialias: true; colorManagement: true">
+  
+  <a-assets>
+    <a-asset-item id="finalModel" src="preso.glb"></a-asset-item>
+    <a-asset-item id="doorModel" src="../assets/door7.glb"></a-asset-item>
+    <a-asset-item id="cassetteModel" src="../assets/cassette.glb"></a-asset-item>
+    <a-asset-item id="note5Model" src="../assets/note.glb"></a-asset-item>
+  </a-assets>
 
-  <a-scene cursor="rayOrigin: mouse" renderer="antialias: true; colorManagement: true">
+<a-scene cursor="rayOrigin: mouse" 
+            renderer="antialias: true; colorManagement: true">
  
    <!-- Assets -->
   <a-assets>
@@ -53,48 +64,23 @@
         material="metalness:0; roughness:1">
       </a-entity>
 
-    <!-- Cámara / jugador -->
-    <a-entity id="playerRig" position="0 1.4 0">
-      <a-entity camera look-controls>
-        <!-- Cursor para hacer click -->
-        <a-cursor fuse="false" raycaster="objects: .teleport, .teleport2"></a-cursor>
-      </a-entity>
+  <a-entity id="playerRig" position="0 0 0">
+    <a-entity camera look-controls>
+      <a-cursor fuse="false" raycaster="objects: .clickable, .aframe-clickable"></a-cursor>
     </a-entity>
+  </a-entity>
 
-    <!-- Iluminación -->
-    <a-entity light="type: ambient; intensity: 0.7"></a-entity>
-    <a-entity light="type: directional; intensity: 1" position="105 -190 5" rotation="-45 45 0"></a-entity>
-    <a-entity light="type: hemisphere; skyColor: #000000; groundColor: #000000; intensity: 0.5"></a-entity>
+  <a-entity light="type: ambient; intensity: 0.7"></a-entity>
+  <a-entity light="type: directional; intensity: 1" position="105 -190 5"></a-entity>
 
-    <!-- Componente de teletransporte -->
-    <script>
-      AFRAME.registerComponent('teleport-on-click', {
-  init: function () {
-    const player = document.getElementById('playerRig');
+</a-scene>
 
-    // Teleport normal
-    const teleports = document.querySelectorAll('.teleport');
-    teleports.forEach(function (sphere) {
-      sphere.addEventListener('click', function () {
-        const pos = sphere.getAttribute('position');
-        player.setAttribute('position', `${pos.x} ${pos.y + 15} ${pos.z}`);
-      });
-    });
-  }
-});
-      document.querySelector('a-scene').setAttribute('teleport-on-click', '');
-    </script>
-
-  </a-scene>
-
-<script defer>
-  catchableObject("#note5","status_nota 5", "📝5");
+<script>
+  // Inicialización de lógica de escape room
+  // Asegúrate de que los IDs coincidan exactamente
+  catchableObject("#note5", "status_nota 5", "📝5");
   questionGate("#door7", 0, "../enfermeria/index.html", "status_nota 4");
-
-
 </script>
 
 </body>
 </html>
-
-
