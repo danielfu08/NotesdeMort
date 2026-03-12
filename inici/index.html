@@ -7,16 +7,9 @@
   <script src="https://agarci9inscastellet.github.io/scaperoom/js/scaperoom.js"></script>
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
 </head>
 <body>
-
-  <div id="notePopup" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); justify-content:center; align-items:center; z-index:9999; font-family:'Courier New', monospace;">
-    <div style="max-width:600px; padding:40px; border:1px solid #444; background:#0a0a0a; color:#cfcfcf; text-align:center; box-shadow:0 0 30px rgba(0,0,0,1);">
-      <div id="noteContent">
-        </div>
-      <button onclick="closeNote()" style="margin-top:30px; background:none; color:#cfcfcf; border:1px solid #666; padding:10px 20px; cursor:pointer; text-transform:uppercase; letter-spacing:2px;">Cerrar</button>
-    </div>
-  </div>
 
   <a-scene cursor="rayOrigin: mouse" renderer="antialias: true; colorManagement: true">
     <a-assets>
@@ -47,40 +40,36 @@
     <a-entity light="type: directional; intensity: 0.8" position="1 2 1"></a-entity>
   </a-scene>
 
-  <script>
-let notesData = {};
+<div id="notePopup" style="
+  display:none;
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:rgba(0,0,0,0.85);
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+  font-family:'Special Elite', monospace;">
+  <div id="notePopupInner" style="
+    max-width:620px;
+    padding:50px;
+    border:1px solid #2a2a2a;
+    background:rgba(10,10,10,0.95);
+    color:#cfcfcf;
+    text-align:center;
+    box-shadow:0 0 40px rgba(0,0,0,0.9);">
+    <h1 id="noteTitle" style="letter-spacing:4px;">NOTA ███</h1>
+    <p id="noteText">Aquí irá el texto de la nota.</p>
+    <button onclick="closeNote()" style="
+      margin-top:20px;
+      background:none;
+      color:#cfcfcf;
+      border:1px solid #444;
+      padding:12px 25px;
+      cursor:pointer;">Tancar</button>
+  </div>
+</div>
 
-// Carga el JSON al iniciar
-fetch('/notes.json')
-  .then(response => response.json())
-  .then(data => {
-    notesData = data;
-  })
-  .catch(err => console.error("Error cargando notas:", err));
-
-function openNoteById(noteId){
-  if(!notesData[noteId]){
-    console.warn("Nota no encontrada:", noteId);
-    return;
-  }
-  document.getElementById("noteTitle").innerHTML = notesData[noteId].title;
-  document.getElementById("noteText").innerHTML = notesData[noteId].text;
-  document.getElementById("notePopup").style.display = "flex";
-}
-
-function closeNote(){
-  document.getElementById("notePopup").style.display = "none";
-}
-
-// Asocia todas las notas automáticamente
-document.addEventListener("DOMContentLoaded", () => {
-  const notes = document.querySelectorAll(".clickable"); // todas las entidades con clase clickable
-  notes.forEach(note => {
-    note.addEventListener("click", () => {
-      openNoteById(note.id);
-    });
-  });
-});
-</script>
+<script src="../notes_system.js"></script>
 </body>
 </html>

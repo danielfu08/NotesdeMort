@@ -17,6 +17,7 @@
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
 </head>
 <body>
   <a-scene cursor="rayOrigin: mouse" renderer="antialias: true; colorManagement: true">
@@ -102,5 +103,38 @@
 </script>
 
   </a-scene>
+
+
+<div id="notePopup" style="
+  display:none;
+  position:fixed;
+  top:0; left:0;
+  width:100%; height:100%;
+  background:rgba(0,0,0,0.85);
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+  font-family:'Special Elite', monospace;">
+  <div id="notePopupInner" style="
+    max-width:620px;
+    padding:50px;
+    border:1px solid #2a2a2a;
+    background:rgba(10,10,10,0.95);
+    color:#cfcfcf;
+    text-align:center;
+    box-shadow:0 0 40px rgba(0,0,0,0.9);">
+    <h1 id="noteTitle" style="letter-spacing:4px;">NOTA ███</h1>
+    <p id="noteText">Aquí irá el texto de la nota.</p>
+    <button onclick="closeNote()" style="
+      margin-top:20px;
+      background:none;
+      color:#cfcfcf;
+      border:1px solid #444;
+      padding:12px 25px;
+      cursor:pointer;">Tancar</button>
+  </div>
+</div>
+
+<script src="../notes_system.js"></script>
 </body>
 </html>
