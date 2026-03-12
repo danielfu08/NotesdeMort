@@ -1,16 +1,16 @@
 <!DOCTYPE html>
+
 <html lang="es">
-  
 <head>
-  <meta charset="UTF-8">
-    <script defer>
+<meta charset="utf-8"/>
+<script defer="">
      if (new URLSearchParams(window.location.search).has('?clear')){
       resetStatus();
      }
 
   </script>
-  <title>Arxiu █████</title>
-  <style>
+<title>Arxiu █████</title>
+<style>
     @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
 
     body {
@@ -101,65 +101,28 @@
   </style>
 </head>
 <body>
-  <div class="noise"></div>
-
-  <div class="container">
-    <h1>ARCHIVO █████</h1>
-    <p>
-      Un hospital que no figura en els registres.<br>
-      Un pacient que <span>recordaba massa</span>.<br>
-      Un alt comandament que mai va pensar en ser observat.<br><br>
-      Les notes i els cassettes són allà.<br>
-      Esperant a algú que escolti.<br><br>
-      Aixó no es una investigació.<br>
+<div class="noise"></div>
+<div class="container">
+<h1>ARCHIVO █████</h1>
+<p>
+      Un hospital que no figura en els registres.<br/>
+      Un pacient que <span>recordaba massa</span>.<br/>
+      Un alt comandament que mai va pensar en ser observat.<br/><br/>
+      Les notes i els cassettes són allà.<br/>
+      Esperant a algú que escolti.<br/><br/>
+      Aixó no es una investigació.<br/>
       Es una <span>reconstrucció</span>.
     </p>
-
-    <button onclick="startGame()">Comença a jugar</button>
-
-    <div class="warning">
+<button onclick="startGame()">Comença a jugar</button>
+<div class="warning">
       Algunes veritats no haurien de recordar-se.
     </div>
-  </div>
-
-  <script>
+</div>
+<script>
     function startGame() {
       // Redirige al siguiente espacio del juego
       window.location.href = "./inici/index.html?clear";
     }
   </script>
-
-
-<div id="notePopup" style="
-  display:none;
-  position:fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background:rgba(0,0,0,0.85);
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
-  font-family:'Special Elite', monospace;">
-  <div id="notePopupInner" style="
-    max-width:620px;
-    padding:50px;
-    border:1px solid #2a2a2a;
-    background:rgba(10,10,10,0.95);
-    color:#cfcfcf;
-    text-align:center;
-    box-shadow:0 0 40px rgba(0,0,0,0.9);">
-    <h1 id="noteTitle" style="letter-spacing:4px;">NOTA ███</h1>
-    <p id="noteText">Aquí irá el texto de la nota.</p>
-    <button onclick="closeNote()" style="
-      margin-top:20px;
-      background:none;
-      color:#cfcfcf;
-      border:1px solid #444;
-      padding:12px 25px;
-      cursor:pointer;">Tancar</button>
-  </div>
-</div>
-
-<script src="./notes_system.js"></script>
-</body>
+<script src="js/note-system.js"></script></body>
 </html>

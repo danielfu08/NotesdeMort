@@ -1,136 +1,62 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>A-Frame — final.glb con puerta y llave</title>
-
-  <!-- scaperoom -->
-  <script src="https://agarci9inscastellet.github.io/scaperoom/js/scaperoom.js"></script>
-
-  <!-- aframe -->
-  <script src="https://aframe.io/releases/1.4.1/aframe.min.js"></script>
-
-  <script defer>
+<meta charset="utf-8"/>
+<title>A-Frame — final.glb con puerta y llave</title>
+<!-- scaperoom -->
+<script src="https://agarci9inscastellet.github.io/scaperoom/js/scaperoom.js"></script>
+<!-- aframe -->
+<script src="https://aframe.io/releases/1.4.1/aframe.min.js"></script>
+<script defer="">
      if (new URLSearchParams(window.location.search).has('?clear')){
       resetStatus();
      }
 
   </script>
-
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-
-  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
 </head>
 <body>
-
-<a-scene a-scene cursor="rayOrigin: mouse" 
-          renderer="antialias: true; colorManagement: true">
-
-  <!-- Assets -->
-  <a-assets>
-    <a-asset-item id="finalModel" src="room.glb"></a-asset-item>
-    <!-- puerta -->
-    <a-asset-item id="doorModel" src="../assets/door5.glb"></a-asset-item>
-    
-    <!-- llave -->
-    <a-asset-item id="cassette" src="../assets/cassette.glb"></a-asset-item>
-
-    <a-asset-item id="noteModel7" src="../assets/note.glb"></a-asset-item>
-  </a-assets>
- <!-- escenario -->
-  <a-entity gltf-model="room.glb" 
-            position="0.59245 -2.22381 0" 
-            rotation="" 
-            scale="0.025 0.025 0.025">
-  </a-entity>
-
-  <!-- PUERTA -->
-  <a-entity id="door9" 
-            gltf-model="#doorModel" 
-            position="-1.16833 -0.6353 2.38407" 
-            rotation="0 180 0" 
-            scale="0.75 0.85 0.75" 
-            class="aframe-clickable">
-  </a-entity>
-  <!-- Cassette -->
-    <a-entity id="cassette1" 
-                gltf-model="../assets/cassette.glb" 
-                position="-2.3167 1.03568 -2.27962" 
-                rotation="0 354.0179999999888 0" 
-                scale="1 1 1" 
-                animation="property: rotation; to: 0 360 0; loop: true; dur: 2000; easing: linear" 
-                class="aframe-clickable">
-    </a-entity>
-
-   <a-entity id="note7"
-        class="clickable" 
-        gltf-model="#noteModel7"
-        position="-2.32642 0.253 2.25044"    
-        rotation="90 0 0"
-        scale="0.025 0.025 0.025"
-        material="metalness:0; roughness:1">
-    </a-entity>
-
-
-  <!-- TELEPORTS -->
-    <a-sphere class="teleport aframe-clickable" 
-                position="0.14 1.3 -1.99851" 
-                radius="0.05" color="#FF0000" 
-                material="" 
-                geometry="">
-            </a-sphere>
-        <a-sphere class="teleport aframe-clickable" 
-                position="-1.30215 1.65069 1.9573" 
-                radius="0.05" 
-                color="#FF0000" 
-                material="" 
-                geometry="">
-        </a-sphere>
-    <a-sphere class="teleport aframe-clickable" 
-                position="-1.80703 0.07665 -0.37165" 
-                radius="0.05" 
-                color="#FF0000" 
-                material="" 
-                geometry="">
-            </a-sphere>
-    <a-sphere class="teleport aframe-clickable" 
-                position="-2.04599 0.36328 1.80944" 
-                radius="0.05" 
-                color="#FF0000" 
-                material="" 
-                geometry="">
-            </a-sphere>
-  <!-- jugador -->
-    <a-entity id="playerRig" 
-                position="-1.14339 0.61543 1.1323" 
-                rotation="0 0 0">
-        <a-entity camera="" 
-                    look-controls="" 
-                    position="" 
-                    rotation="" 
-                    data-aframe-inspector-original-camera="">
-        <a-cursor fuse="false" 
-                    raycaster="objects: .teleport, .clickable" 
-                    material="" 
-                    cursor="" 
-                    geometry="">
-                </a-cursor>
-        </a-entity>
-    </a-entity>
-
-
-
-
-  <!-- luces -->
-  <a-entity light="type: ambient; intensity: 0.7"></a-entity>
-  <a-entity light="type: directional; intensity: 1"
-            position="105 -190 5"
-            rotation="-45 45 0"></a-entity>
-
+<a-scene a-scene="" cursor="rayOrigin: mouse" renderer="antialias: true; colorManagement: true">
+<!-- Assets -->
+<a-assets>
+<a-asset-item id="finalModel" src="room.glb"></a-asset-item>
+<!-- puerta -->
+<a-asset-item id="doorModel" src="../assets/door5.glb"></a-asset-item>
+<!-- llave -->
+<a-asset-item id="cassette" src="../assets/cassette.glb"></a-asset-item>
+<a-asset-item id="noteModel7" src="../assets/note.glb"></a-asset-item>
+</a-assets>
+<!-- escenario -->
+<a-entity gltf-model="room.glb" position="0.59245 -2.22381 0" rotation="" scale="0.025 0.025 0.025">
+</a-entity>
+<!-- PUERTA -->
+<a-entity class="aframe-clickable" gltf-model="#doorModel" id="door9" position="-1.16833 -0.6353 2.38407" rotation="0 180 0" scale="0.75 0.85 0.75">
+</a-entity>
+<!-- Cassette -->
+<a-entity animation="property: rotation; to: 0 360 0; loop: true; dur: 2000; easing: linear" class="aframe-clickable" gltf-model="../assets/cassette.glb" id="cassette1" position="-2.3167 1.03568 -2.27962" rotation="0 354.0179999999888 0" scale="1 1 1">
+</a-entity>
+<a-entity class="clickable" data-note-id="note7" gltf-model="#noteModel7" id="note7" material="metalness:0; roughness:1" position="-2.4992 0.25267 2.025" rotation="0 0 0" scale="0.025 0.025 0.025">
+</a-entity>
+<!-- TELEPORTS -->
+<a-sphere class="teleport aframe-clickable" color="#FF0000" geometry="" material="" position="0.14 1.3 -1.99851" radius="0.05">
+</a-sphere>
+<a-sphere class="teleport aframe-clickable" color="#FF0000" geometry="" material="" position="-1.30215 1.65069 1.9573" radius="0.05">
+</a-sphere>
+<a-sphere class="teleport aframe-clickable" color="#FF0000" geometry="" material="" position="-1.80703 0.07665 -0.37165" radius="0.05">
+</a-sphere>
+<a-sphere class="teleport aframe-clickable" color="#FF0000" geometry="" material="" position="-2.04599 0.36328 1.80944" radius="0.05">
+</a-sphere>
+<!-- jugador -->
+<a-entity id="playerRig" position="-1.14339 0.61543 1.1323" rotation="0 0 0">
+<a-entity camera="" data-aframe-inspector-original-camera="" look-controls="" position="" rotation="">
+<a-cursor cursor="" fuse="false" geometry="" material="" raycaster="objects: .teleport, .clickable">
+</a-cursor>
+</a-entity>
+</a-entity>
+<!-- luces -->
+<a-entity light="type: ambient; intensity: 0.7"></a-entity>
+<a-entity light="type: directional; intensity: 1" position="105 -190 5" rotation="-45 45 0"></a-entity>
 </a-scene>
-
-
 <!-- TELEPORT -->
 <script>
 
@@ -162,45 +88,10 @@ document.querySelector('a-scene')
         .setAttribute('teleport-on-click', '');
 
 </script>
-
-<script defer>
+<script defer="">
   catchableObject("#note7","status_nota 7", "📝7");
   questionGate("#door9", 0, "../biblioteca/index.html", "status_nota 6");
 
 </script>
-
-
-
-<div id="notePopup" style="
-  display:none;
-  position:fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background:rgba(0,0,0,0.85);
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
-  font-family:'Special Elite', monospace;">
-  <div id="notePopupInner" style="
-    max-width:620px;
-    padding:50px;
-    border:1px solid #2a2a2a;
-    background:rgba(10,10,10,0.95);
-    color:#cfcfcf;
-    text-align:center;
-    box-shadow:0 0 40px rgba(0,0,0,0.9);">
-    <h1 id="noteTitle" style="letter-spacing:4px;">NOTA ███</h1>
-    <p id="noteText">Aquí irá el texto de la nota.</p>
-    <button onclick="closeNote()" style="
-      margin-top:20px;
-      background:none;
-      color:#cfcfcf;
-      border:1px solid #444;
-      padding:12px 25px;
-      cursor:pointer;">Tancar</button>
-  </div>
-</div>
-
-<script src="../notes_system.js"></script>
-</body>
+<script src="../js/note-system.js"></script></body>
 </html>

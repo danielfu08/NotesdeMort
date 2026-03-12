@@ -1,84 +1,51 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>A-Frame — final.glb con teletransporte</title>
-
-  <script src="https://aframe.io/releases/1.4.1/aframe.min.js"></script>
-  <script src="https://agarci9inscastellet.github.io/scaperoom/js/scaperoom.js"></script>
-
-  <script defer>
+<meta charset="utf-8"/>
+<title>A-Frame — final.glb con teletransporte</title>
+<script src="https://aframe.io/releases/1.4.1/aframe.min.js"></script>
+<script src="https://agarci9inscastellet.github.io/scaperoom/js/scaperoom.js"></script>
+<script defer="">
      if (new URLSearchParams(window.location.search).has('clear')){
       resetStatus();
      }
 
   </script>
-
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-
-  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/toastify-js" type="text/javascript"></script>
 </head>
 <body>
-  <a-scene cursor="rayOrigin: mouse" renderer="antialias: true; colorManagement: true">
-
-    <!-- Carga del GLB -->
-    <a-assets>
-      <a-asset-item id="bathModel" src="lavabos.glb"></a-asset-item>
-      <a-asset-item id="noteModel1" src="../assets/note.glb"></a-asset-item>
-      <a-asset-item id="doorModel" src="../assets/door2.glb"></a-asset-item>
-    </a-assets>
-
-    <!-- Modelo visual -->
-    <a-entity gltf-model="#bathModel"
-              position="1550 -50 1340"
-              rotation="0 0 0"
-              scale="1 1 1"
-              material="metalness:0; roughness:1">
-    </a-entity>
-
-    <a-entity id="note2" 
-        class="clickable" 
-        gltf-model="../assets/note.glb" 
-        position="83.17516 0.07182 53.52107" 
-        rotation="-90.00021045914971 45 0" 
-        scale="2 2 2" 
-        material="roughness: 1" 
-        visible="" 
-        style="opacity: 1;">
-      </a-entity>
-
-    <a-entity id="door2" 
-        gltf-model="../assets/door2.glb" 
-        position="-40 -50.70453 61.39498" 
-        rotation="0 90 0" scale="0.4 0.4 1" 
-        material="roughness: 1" 
-        visible="" 
-        class="aframe-clickable">
-     </a-entity>
-
-    <!-- Esferas de teletransporte -->
-    <a-sphere class="teleport" position="80.17516 -20 0.52107" radius="3" color="#FF0000"></a-sphere>
-    <a-sphere class="teleport" position="0 -20 0" radius="3" color="#FF0000"></a-sphere>
-
-
- 
-
-    <!-- Cámara / jugador -->
-    <a-entity id="playerRig" position="0 0 0" rotation="0 -90 0">
-      <a-entity camera look-controls>
-        <!-- Cursor para hacer click -->
-        <a-cursor fuse="false" raycaster="objects: .teleport"></a-cursor>
-      </a-entity>
-    </a-entity>
-
-    <!-- Iluminación -->
-    <a-entity light="type: ambient; intensity: 0.7"></a-entity>
-    <a-entity light="type: directional; intensity: 1" position="105 -190 5" rotation="-45 45 0"></a-entity>
-    <a-entity light="type: hemisphere; skyColor: #ffffff; groundColor: #444444; intensity: 0.5"></a-entity>
-
-    <!-- Componente de teletransporte -->
-    <script>
+<a-scene cursor="rayOrigin: mouse" renderer="antialias: true; colorManagement: true">
+<!-- Carga del GLB -->
+<a-assets>
+<a-asset-item id="bathModel" src="lavabos.glb"></a-asset-item>
+<a-asset-item id="noteModel1" src="../assets/note.glb"></a-asset-item>
+<a-asset-item id="doorModel" src="../assets/door2.glb"></a-asset-item>
+</a-assets>
+<!-- Modelo visual -->
+<a-entity gltf-model="#bathModel" material="metalness:0; roughness:1" position="1550 -50 1340" rotation="0 0 0" scale="1 1 1">
+</a-entity>
+<a-entity class="clickable" data-note-id="note2" gltf-model="../assets/note.glb" id="note2" material="roughness: 1" position="83.17516 0.07182 53.52107" rotation="-90.00021045914971 45 0" scale="2 2 2" style="opacity: 1;" visible="">
+</a-entity>
+<a-entity class="aframe-clickable" gltf-model="../assets/door2.glb" id="door2" material="roughness: 1" position="-40 -50.70453 61.39498" rotation="0 90 0" scale="0.4 0.4 1" visible="">
+</a-entity>
+<!-- Esferas de teletransporte -->
+<a-sphere class="teleport" color="#FF0000" position="80.17516 -20 0.52107" radius="3"></a-sphere>
+<a-sphere class="teleport" color="#FF0000" position="0 -20 0" radius="3"></a-sphere>
+<!-- Cámara / jugador -->
+<a-entity id="playerRig" position="0 0 0" rotation="0 -90 0">
+<a-entity camera="" look-controls="">
+<!-- Cursor para hacer click -->
+<a-cursor fuse="false" raycaster="objects: .clickable, .teleport"></a-cursor>
+</a-entity>
+</a-entity>
+<!-- Iluminación -->
+<a-entity light="type: ambient; intensity: 0.7"></a-entity>
+<a-entity light="type: directional; intensity: 1" position="105 -190 5" rotation="-45 45 0"></a-entity>
+<a-entity light="type: hemisphere; skyColor: #ffffff; groundColor: #444444; intensity: 0.5"></a-entity>
+<!-- Componente de teletransporte -->
+<script>
       AFRAME.registerComponent('teleport-on-click', {
         init: function () {
           const spheres = document.querySelectorAll('.teleport');
@@ -95,46 +62,11 @@
 
       document.querySelector('a-scene').setAttribute('teleport-on-click', '');
     </script>
-
-<script defer>
+<script defer="">
   questionGate("#door2", 0, "../inici/index.html", "status_nota 1");
   catchableObject("#note2","status_nota 2", "📝2");
 
 </script>
-
-  </a-scene>
-
-
-<div id="notePopup" style="
-  display:none;
-  position:fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background:rgba(0,0,0,0.85);
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
-  font-family:'Special Elite', monospace;">
-  <div id="notePopupInner" style="
-    max-width:620px;
-    padding:50px;
-    border:1px solid #2a2a2a;
-    background:rgba(10,10,10,0.95);
-    color:#cfcfcf;
-    text-align:center;
-    box-shadow:0 0 40px rgba(0,0,0,0.9);">
-    <h1 id="noteTitle" style="letter-spacing:4px;">NOTA ███</h1>
-    <p id="noteText">Aquí irá el texto de la nota.</p>
-    <button onclick="closeNote()" style="
-      margin-top:20px;
-      background:none;
-      color:#cfcfcf;
-      border:1px solid #444;
-      padding:12px 25px;
-      cursor:pointer;">Tancar</button>
-  </div>
-</div>
-
-<script src="../notes_system.js"></script>
-</body>
+</a-scene>
+<script src="../js/note-system.js"></script></body>
 </html>

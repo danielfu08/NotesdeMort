@@ -1,75 +1,86 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>A-Frame — Escape Room Dinámico</title>
-  <script src="https://aframe.io/releases/1.4.1/aframe.min.js"></script>
-  <script src="https://agarci9inscastellet.github.io/scaperoom/js/scaperoom.js"></script>
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap" rel="stylesheet">
+<meta charset="utf-8"/>
+<title>A-Frame — final.glb con teletransporte</title>
+<script src="https://aframe.io/releases/1.4.1/aframe.min.js"></script>
+<script src="https://agarci9inscastellet.github.io/scaperoom/js/scaperoom.js"></script>
+<script defer="">
+     if (new URLSearchParams(window.location.search).has('?clear')){
+      resetStatus();
+     }
+
+  </script>
+<link href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/npm/toastify-js" type="text/javascript"></script>
 </head>
 <body>
+<a-scene cursor="rayOrigin: mouse" renderer="antialias: true; colorManagement: true">
+<!-- Carga del GLB -->
+<a-assets>
+<a-asset-item id="finalModel" src="final.glb"></a-asset-item>
+<a-asset-item id="noteModel1" src="../assets/note.glb"></a-asset-item>
+<a-asset-item id="doorModel" src="../assets/door2.glb"></a-asset-item>
+<a-asset-item id="doorModel3" src="../assets/door3.glb"></a-asset-item>
+</a-assets>
+<!-- Modelo visual -->
+<a-entity gltf-model="#finalModel" material="metalness:0; roughness:1" position="100 -200 0" rotation="0 0 0" scale="1 1 1">
+</a-entity>
+<a-entity class="clickable" data-note-id="note1" gltf-model="#noteModel1" id="note1" material="metalness:0; roughness:1" position="-155 -15 50" rotation="0 0 0" scale="2 2 2">
+</a-entity>
+<a-entity gltf-model="../assets/door2.glb" id="door2" material="metalness:0; roughness:1" position="49.27468 -56.919 -55.102" rotation="0 90 0" scale="0.5 0.5 1">
+</a-entity>
+<a-entity gltf-model="../assets/door2.glb" id="door2-2" material="metalness:0; roughness:1" position="64.30275 -56.919 -150.65362" rotation="0 270 0" scale="0.5 0.5 1">
+</a-entity>
+<a-entity gltf-model="../assets/door3.glb" id="door3" material="metalness:0; roughness:1" position="-54.88653 -60 185" rotation="" scale="0.25 0.30 0.25">
+</a-entity>
+<!-- POPUP NOTA -->
+<!-- Esferas de teletransporte -->
+<a-sphere class="teleport" color="#FF0000" position="33 61 -133" radius="3"></a-sphere>
+<a-sphere class="teleport" color="#FF0000" position="33 61 152" radius="3"></a-sphere>
+<a-sphere class="teleport" color="#FF0000" position="-128 61 -133" radius="3"></a-sphere>
+<a-sphere class="teleport" color="#FF0000" position="-128 65 151" radius="3"></a-sphere>
+<a-sphere class="teleport" color="#FF0000" geometry=""status_nota material="" position="-53 -0 133" radius="3"></a-sphere>
+<a-sphere class="teleport" color="#FF0000" geometry="" material="" position="38 -0 -0" radius="3"></a-sphere>
+<a-sphere class="teleport" color="#FF0000" geometry="" material="" position="-51 -0 -173" radius="3"></a-sphere>
+<a-sphere class="teleport" color="#FF0000" geometry="" material="" position="-152 -0 -0" radius="4"></a-sphere>
+<!-- Cámara / jugador -->
+<a-entity id="playerRig" position="0 0 0">
+<a-entity camera="" look-controls="">
+<!-- Cursor para hacer click -->
+<a-cursor fuse="false" raycaster="objects: .clickable, .teleport"></a-cursor>
+</a-entity>
+</a-entity>
+<!-- Iluminación -->
+<a-entity light="type: ambient; intensity: 0.7"></a-entity>
+<a-entity light="type: directional; intensity: 1" position="105 -190 5" rotation="-45 45 0"></a-entity>
+<a-entity light="type: hemisphere; skyColor: #ffffff; groundColor: #444444; intensity: 0.5"></a-entity>
+<!--Notes-->
+<!-- Componente de teletransporte -->
+<script>
+      AFRAME.registerComponent('teleport-on-click', {
+        init: function () {
+          const spheres = document.querySelectorAll('.teleport');
+          const player = document.getElementById('playerRig');
 
-  <a-scene cursor="rayOrigin: mouse" renderer="antialias: true; colorManagement: true">
-    <a-assets>
-      <a-asset-item id="finalModel" src="final.glb"></a-asset-item>
-      <a-asset-item id="noteModel" src="../assets/note.glb"></a-asset-item>
-      <a-asset-item id="doorModel2" src="../assets/door2.glb"></a-asset-item>
-      <a-asset-item id="doorModel3" src="../assets/door3.glb"></a-asset-item>
-    </a-assets>
+          spheres.forEach(function(sphere) {
+            sphere.addEventListener('click', function () {
+              const pos = sphere.getAttribute('position');
+              player.setAttribute('position', `${pos.x} ${pos.y + 1.6} ${pos.z}`);
+            });
+          });
+        }
+      });
 
-    <a-entity gltf-model="#finalModel" position="100 -200 0"></a-entity>
-
-    <a-entity id="note1" class="clickable" gltf-model="#noteModel" position="-155 -15 50" scale="2 2 2"></a-entity>
-    
-    <a-entity id="door2" class="clickable" gltf-model="#doorModel2" position="49.27 -56.91 -55.10" rotation="0 90 0" scale="0.5 0.5 1"></a-entity>
-    <a-entity id="door3" class="clickable" gltf-model="#doorModel3" position="-54.88 -60 185" scale="0.25 0.3 0.25"></a-entity>
-
-    <a-sphere class="teleport" position="33 61 -133" radius="3" color="#FF0000"></a-sphere>
-    <a-sphere class="teleport" position="-53 0 133" radius="3" color="#FF0000"></a-sphere>
-    <a-sphere class="teleport" position="-152 0 0" radius="4" color="#FF0000"></a-sphere>
-
-    <a-entity id="playerRig" position="0 0 0">
-      <a-entity camera look-controls>
-        <a-cursor fuse="false" raycaster="objects: .clickable, .teleport"></a-cursor>
-      </a-entity>
-    </a-entity>
-
-    <a-entity light="type: ambient; intensity: 0.6"></a-entity>
-    <a-entity light="type: directional; intensity: 0.8" position="1 2 1"></a-entity>
-  </a-scene>
-
-<div id="notePopup" style="
-  display:none;
-  position:fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background:rgba(0,0,0,0.85);
-  justify-content:center;
-  align-items:center;
-  z-index:9999;
-  font-family:'Special Elite', monospace;">
-  <div id="notePopupInner" style="
-    max-width:620px;
-    padding:50px;
-    border:1px solid #2a2a2a;
-    background:rgba(10,10,10,0.95);
-    color:#cfcfcf;
-    text-align:center;
-    box-shadow:0 0 40px rgba(0,0,0,0.9);">
-    <h1 id="noteTitle" style="letter-spacing:4px;">NOTA ███</h1>
-    <p id="noteText">Aquí irá el texto de la nota.</p>
-    <button onclick="closeNote()" style="
-      margin-top:20px;
-      background:none;
-      color:#cfcfcf;
-      border:1px solid #444;
-      padding:12px 25px;
-      cursor:pointer;">Tancar</button>
-  </div>
-</div>
-
-<script src="../notes_system.js"></script>
+      document.querySelector('a-scene').setAttribute('teleport-on-click', '');
+    </script>
+<script defer="">
+  questionGate("#door2", 0, "../lavabos/index.html", "status_nota 1");
+  catchableObject("#note1","status_nota 1", "📝1");
+  questionGate("#door3", 0, "../passadis/index.html", "status_nota 2");
+</script>
+</a-scene>
+<script src="../js/note-system.js"></script>
 </body>
 </html>

@@ -1,0 +1,46 @@
+{
+  "note1": {
+    "title": "🗒️ NOTA 1 – Recepció",
+    "text": "No hauria d’haver començat aquí.\nSempre es comença aquí.\nTot sembla en ordre quan algú vol que ho sembli.\nPerò hi ha una cosa que sempre queda escrita abans que res:\nNingú entra sense deixar rastre.\nObliguen a apuntar cada visita.\nMarquen qui arriba i quan.\nTot sempre queda registrat."
+  },
+  "note2": {
+    "title": "🗒️ NOTA 2 – Lavabo",
+    "text": "L’aigua cau lentament.\nEl pacient passava hores aquí dins.\nNo feia res aparentment.\nNomés mirava davant seu.\nMirant fixament la paret.\nImmòbil durant minuts.\nReflectint cada gest.\nAmb una presència silenciosa.\nL’objecte que et retorna la mirada."
+  },
+  "note3": {
+    "title": "🗒️ NOTA 3 – Passadís",
+    "text": "Caminar per aquest passadís és inquietant.\nCom si algú hagués passat per aquí mil vegades abans.\nEl pacient coneixia aquest lloc millor que ningú.\nObria els ulls a cada detall.\nBuscava patrons.\nSeguia moviments.\nEntenia els silencis.\nRecollia informació.\nVeia el que altres ignoraven.\nAprenent sense parlar.\nRepetint-ho cada dia."
+  },
+  "note4": {
+    "title": "🗒️ NOTA 4 – Infermeria",
+    "text": "Les dosis no coincideixen amb els diagnòstics.\nAlgú aquí amagava alguna cosa.\nEl pacient recordava massa.\nRetenien fragments de memòria.\nEsborraven detalls.\nCanviaven històries.\nOblidaven dades.\nReduïen el passat.\nDeixaven buits.\nSilenciaven la ment."
+  },
+  "note5": {
+    "title": "🗒️ NOTA 5 – Aïllament",
+    "text": "Les parets no estan toves.\nEstan plenes de marques.\nEsgarrapades profundes.\nSignes repetits.\nGuix aixecat de la paret.\nAmb força desesperada.\nRascant sense parar.\nReptant el silenci.\nAmb ungles trencades.\nPer deixar rastre.\nA la superfície.\nDurant hores.\nEn silenci.\nSense parar."
+  },
+  "note6": {
+    "title": "🗒️ NOTA 6 – Biblioteca",
+    "text": "Els llibres no menteixen.\nEls informes sí.\nEl pacient llegia més del que hauria pogut.\nCreava relacions entre dades.\nOrdenava fragments.\nNotava coincidències.\nNegava les mentides.\nEntrellaçava pistes.\nXifrava patrons.\nInterpretava documents.\nOrganitzava la veritat.\nNarrava el que faltava.\nSense dir-ho en veu alta."
+  },
+  "note7": {
+    "title": "🗒️ NOTA 7 – Sala de l’Assassinat",
+    "text": "No hi ha signes de defensa.\nNomés un instant congelat.\nSilenci absolut.\nOlls oberts.\nReacció tardana.\nPensament interromput.\nRespiració tallada.\nEn un segon.\nSense entendre què passa.\nAbans del final."
+  },
+  "note8": {
+    "title": "🗒️ NOTA 8 – Àtic",
+    "text": "Des d’aquí tot encaixa.\nCàmeres. Horaris. Rutes.\nCada detall estudiat.\nAnticipant moviments.\nLligant proves.\nConstruint el pla.\nUnint fragments.\nLimitant errors.\nAjustant cada pas.\nTraçant el final."
+  },
+  "note9": {
+    "title": "🗒️ NOTA 9 – Conductes",
+    "text": "L’escapada no va ser una fugida.\nVa ser una pista.\nIndicis amagats.\nNo eren casuals.\nVolien ser trobats.\nIndicaven el camí.\nTraçaven la ruta.\nAvisaven algú.\nConvidaven a seguir.\nInvitaven a entendre.\nÒbviament preparat."
+  },
+  "note10": {
+    "title": "🗒️ NOTA 10 – Sala d’Interrogatori",
+    "text": "Ara no estàs interrogant ningú.\nEstàs escoltant la història.\nRecollint proves.\nEntenen els fragments.\nVeient la veritat.\nEnllaçant records.\nLlegint cada nota.\nAbrint els ulls.\nTraient la conclusió."
+  },
+  "default_note_id": {
+    "title": "NOTA GENERAL",
+    "text": "Aquesta és una nota genèrica. Si estàs veient això, probablement l'entitat clicable no té un 'data-note-id' assignat correctament."
+  }
+}
