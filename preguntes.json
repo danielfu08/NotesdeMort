@@ -1,42 +1,53 @@
 [
   {
     "id": 1,
-    "question": "¿Qué indica que algo no está del todo en orden en la recepción?"
+    "question": "El primer que es registra aquí.",
+    "answer": "noms"
+
   },
   {
     "id": 2,
-    "question": "¿Qué revela el comportamiento del paciente en el lavabo?"
+    "question": "El que feia aquí, sense testimonis.",
+    "answer": "mirall"  
   },
   {
     "id": 3,
-    "question": "¿Qué sugiere la experiencia del pasillo?"
+    "question": "El que realment feia el pacient.",
+    "answer": "observar"
   },
   {
     "id": 4,
-    "question": "¿Qué revelan los registros de enfermería?"
+    "question": "El que intentaven suprimir.",
+    "answer": "records"
   },
   {
     "id": 5,
-    "question": "¿Qué insinúan los arañazos y marcas en las paredes?"
+    "question": "El que van deixar a les parets.",
+    "answer": "esgarrapades"
   },
   {
     "id": 6,
-    "question": "¿Qué papel tienen los libros y los informes en la investigación?"
+    "question": "El que el pacient estava fent realment.",
+    "answer": "connexions"
   },
   {
     "id": 7,
-    "question": "¿Cuál fue la reacción del alto mando?"
+    "question": "L’únic que va quedar a l’escena.",
+    "answer": "sorpresa"
   },
   {
     "id": 8,
-    "question": "¿Qué revela la vista desde el ático?"
+    "question": "La naturalesa real del crim.",
+    "answer": "calculat"
   },
   {
     "id": 9,
-    "question": "¿Qué sugiere la intención del paciente al dejar notas?"
+    "question": "El que realment va ser l’escapada.",
+    "answer": "invitacio"
   },
   {
     "id": 10,
-    "question": "¿Qué se necesita para comprender la verdad del caso?"
+    "question": "El que realment va passar amb el cas.",
+    "answer": "revelat"
   }
 ]
