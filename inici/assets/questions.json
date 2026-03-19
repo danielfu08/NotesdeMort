@@ -1,8 +1,13 @@
 [
   {
+    "id": 0,
+    "question": "NO QUESTION",
+    "answer": "id=0 means, no question will be done"
+  },
+  {
     "id": 1,
     "question": "El primer que es registra aquí.",
-    "answer": "noms"
+    "answer": "nom"
 
   },
   {
