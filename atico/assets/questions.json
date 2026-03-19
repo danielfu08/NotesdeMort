@@ -1,0 +1,58 @@
+[
+  {
+    "id": 0,
+    "question": "NO QUESTION",
+    "answer": "id=0 means, no question will be done"
+  },
+  {
+    "id": 1,
+    "question": "El primer que es registra aquí.",
+    "answer": "nom"
+
+  },
+  {
+    "id": 2,
+    "question": "El que feia aquí, sense testimonis.",
+    "answer": "mirall"  
+  },
+  {
+    "id": 3,
+    "question": "El que realment feia el pacient.",
+    "answer": "observar"
+  },
+  {
+    "id": 4,
+    "question": "El que intentaven suprimir.",
+    "answer": "records"
+  },
+  {
+    "id": 5,
+    "question": "El que van deixar a les parets.",
+    "answer": "esgarrapades"
+  },
+  {
+    "id": 6,
+    "question": "El que el pacient estava fent realment.",
+    "answer": "connexions"
+  },
+  {
+    "id": 7,
+    "question": "L’únic que va quedar a l’escena.",
+    "answer": "sorpresa"
+  },
+  {
+    "id": 8,
+    "question": "La naturalesa real del crim.",
+    "answer": "calculat"
+  },
+  {
+    "id": 9,
+    "question": "El que realment va ser l’escapada.",
+    "answer": "invitacio"
+  },
+  {
+    "id": 10,
+    "question": "El que realment va passar amb el cas.",
+    "answer": "revelat"
+  }
+]
