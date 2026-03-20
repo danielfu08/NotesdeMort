@@ -1,91 +1,87 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
-<meta charset="utf-8"/>
-<title>A-Frame — passadis.glb con teletransporte</title>
-<script src="https://aframe.io/releases/1.4.1/aframe.min.js"></script>
-<script src="https://agarci9inscastellet.github.io/scaperoom/js/scaperoom.js"></script>
-<script defer="">
-     if (new URLSearchParams(window.location.search).has('clear')){
-      resetStatus();
-     }
+    <meta charset="utf-8"/>
+    <title>A-Frame — Biblioteca con Cassette y Teletransporte</title>
+    <script src="https://aframe.io/releases/1.4.1/aframe.min.js"></script>
+    
+    <script>
+        AFRAME.registerComponent('logic-handler', {
+            init: function () {
+                const player = document.getElementById('playerRig');
 
-  </script>
-<link href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" rel="stylesheet" type="text/css"/>
-<script src="https://cdn.jsdelivr.net/npm/toastify-js" type="text/javascript"></script>
+                // Teleport Logic
+                const teleports = document.querySelectorAll('.teleport');
+                teleports.forEach((sphere) => {
+                    sphere.addEventListener('click', () => {
+                        const pos = sphere.getAttribute('position');
+                        // Use attribute updates for the player rig
+                        player.setAttribute('position', {x: pos.x, y: pos.y + 1.6, z: pos.z}); 
+                    });
+                });
+
+                // Cassette Logic
+                const cassette = document.querySelector("#cassette6");
+                if (cassette) {
+                    cassette.addEventListener("click", () => {
+                        console.log("Cassette activado");
+                        if (typeof playAudio === "function") {
+                            playAudio("biblioteca");
+                        }
+                        cassette.setAttribute("visible", false);
+                        cassette.classList.remove("clickable"); 
+                    });
+                }
+            }
+        });
+    </script>
+
+    <script src="https://agarci9inscastellet.github.io/scaperoom/js/scaperoom.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" rel="stylesheet" type="text/css"/>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </head>
 <body>
-<a-scene cursor="rayOrigin: mouse" renderer="antialias: true; colorManagement: true">
-<!-- Carga del GLB -->
-<a-assets>
-<a-asset-item id="noteModel6" src="../assets/note.glb"></a-asset-item>
-<a-asset-item id="biblioModel" src="biblioteca.glb"></a-asset-item>
-<a-asset-item id="doorModel" src="../assets/door5.glb"></a-asset-item>
-</a-assets>
-<!-- Modelo visual -->
-<a-entity gltf-model="#biblioModel" material="metalness:0; roughness:1" position="3 -28.5 5" rotation="0 0 0" scale="0.25 0.25 0.25">
-</a-entity>
-<a-entity class="clickable" data-note-id="note6" gltf-model="#noteModel6" id="note6" material="metalness:0; roughness:1" position="-6.752 1.34817 17.3257" rotation="90 0 0" scale="0.25 0.25 0.25">
-</a-entity>
-<a-entity gltf-model="#doorModel" id="door5" material="metalness:0; roughness:1" position="4.18014 -9.8 -0.14648" rotation="0 270 0" scale="6 6 6">
-</a-entity>
-<a-entity gltf-model="#doorModel" id="door5-2" material="metalness:0; roughness:1" position="-20.096 -9.8 14.60896" rotation="0 270 0" scale="6 6 6">
-</a-entity>
-<!-- Esferas de teletransporte -->
-<a-sphere class="teleport" color="#FF0000" position="-8.752 -5 8" radius="0.5"></a-sphere>
-<a-sphere class="teleport" color="#FF0000" position="0 -5 0" radius="0.5"></a-sphere>
-<a-sphere class="teleport" color="#FF0000" position="-6 -5 -4" radius="0.5"></a-sphere>
-<a-sphere class="teleport" color="#FF0000" position="-15.752 -5 12.5" radius="0.5"></a-sphere>
-<!-- Cámara / jugador -->
-<a-entity id="playerRig" position="0 0 0" rotation="0 90 0">
-<a-entity camera="" look-controls="">
-<!-- Cursor para hacer click -->
-<a-cursor fuse="false" raycaster="objects: .clickable, .teleport, .teleport2"></a-cursor>
-</a-entity>
-</a-entity>
-<!-- Iluminación -->
-<a-entity light="type: ambient; intensity: 0.7"></a-entity>
-<a-entity light="type: directional; intensity: 1" position="105 -190 5" rotation="-45 45 0"></a-entity>
-<a-entity light="type: hemisphere; skyColor: #000000; groundColor: #000000; intensity: 0.5"></a-entity>
-<!-- Componente de teletransporte -->
-<script>
-      AFRAME.registerComponent('teleport-on-click', {
-  init: function () {
-    const player = document.getElementById('playerRig');
+    <a-scene logic-handler renderer="antialias: true; colorManagement: true" cursor="rayOrigin: mouse">
+        
+        <a-assets>
+            <a-asset-item id="noteModel6" src="../assets/note.glb"></a-asset-item>
+            <a-asset-item id="biblioModel" src="biblioteca.glb"></a-asset-item>
+            <a-asset-item id="doorModel" src="../assets/door5.glb"></a-asset-item>
+            <a-asset-item id="modelCassette" src="../assets/cassette.glb"></a-asset-item>
+        </a-assets>
 
-    // Teleport normal
-    const teleports = document.querySelectorAll('.teleport');
-    teleports.forEach(function (sphere) {
-      sphere.addEventListener('click', function () {
-        const pos = sphere.getAttribute('position');
-        player.setAttribute('position', `${pos.x} ${pos.y + 5} ${pos.z}`);
-      });
-    });
+        <a-entity gltf-model="#biblioModel" position="3 -28.5 5" scale="0.25 0.25 0.25"></a-entity>
+        <a-entity id="note6" class="clickable" gltf-model="#noteModel6" position="-6.752 1.34817 17.3257" rotation="90 0 0" scale="0.25 0.25 0.25"></a-entity>
+        <a-entity id="door5" gltf-model="#doorModel" position="4.18014 -9.8 -0.14648" rotation="0 270 0" scale="6 6 6"></a-entity>
+        <a-entity id="door5-2" gltf-model="#doorModel" position="-20.096 -9.8 14.60896" rotation="0 270 0" scale="6 6 6"></a-entity>
+        
+        <a-entity id="cassette6" class="clickable" gltf-model="#modelCassette" position="-7.69187 -4.20249 0.15169" scale="10 10 10"></a-entity>
 
-    // Teleport diferente
-    const teleports2 = document.querySelectorAll('.teleport2');
-    teleports2.forEach(function (sphere) {
-      sphere.addEventListener('click', function () {
-        const pos = sphere.getAttribute('position');
+        <a-sphere class="teleport clickable" color="#FF0000" position="-8.752 -5 8" radius="0.5"></a-sphere>
+        <a-sphere class="teleport clickable" color="#FF0000" position="0 -5 0" radius="0.5"></a-sphere>
+        <a-sphere class="teleport clickable" color="#FF0000" position="-6 -5 -4" radius="0.5"></a-sphere>
+        <a-sphere class="teleport clickable" color="#FF0000" position="-15.752 -5 12.5" radius="0.5"></a-sphere>
 
-        // Teletransporte distinto
-        player.setAttribute('position', `${pos.x} ${pos.y} ${pos.z}`);
+        <a-entity id="playerRig" position="0 0 0" rotation="0 90 0">
+            <a-entity camera look-controls>
+                <a-cursor fuse="false" raycaster="objects: .clickable"></a-cursor>
+            </a-entity>
+        </a-entity>
+        <a-entity id="sound" sound="src: #idDeTuAudio; autoplay: false; positional: false"></a-entity>
+        <a-entity light="type: ambient; intensity: 0.7"></a-entity>
+        <a-entity light="type: directional; intensity: 1" position="105 -190 5"></a-entity>
 
-        // Ejemplo extra: cambiar rotación
-        player.setAttribute('rotation', `0 0 0`);
-      });
-    });
-  }
-});
-      document.querySelector('a-scene').setAttribute('teleport-on-click', '');
+    </a-scene>
+
+    <script>
+        // Exterior logic (Gate/Note system)
+        window.addEventListener('load', () => {
+            if (typeof catchableObject === "function") {
+                catchableObject("#note6", "status_nota 6", "📝6");
+                questionGate("#door5", 0, "../passadis/index2.html", "status_nota 5");
+                questionGate("#door5-2", 6, "../assesinat/index.html", "status_nota 6");
+            }
+        });
     </script>
-</a-scene>
-<script defer="">
-  catchableObject("#note6","status_nota 6", "📝6");
-  questionGate("#door5", 0, "../passadis/index2.html", "status_nota 5");
-  questionGate("#door5-2", 6, "../assesinat/index.html", "status_nota 6");
-
-</script>
-<script src="../js/note-system.js"></script></body>
+</body>
 </html>
