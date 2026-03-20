@@ -25,15 +25,43 @@
 <a-asset-item id="doorModel3" src="../assets/door3.glb"></a-asset-item>
 </a-assets>
 <!-- Modelo visual -->
-<a-entity gltf-model="#finalModel" material="metalness:0; roughness:1" position="100 -200 0" rotation="0 0 0" scale="1 1 1">
+<a-entity gltf-model="#finalModel" 
+          material="metalness:0; roughness:1" 
+          position="100 -200 0" 
+          rotation="0 0 0" 
+          scale="1 1 1">
 </a-entity>
-<a-entity class="clickable" data-note-id="note1" gltf-model="#noteModel1" id="note1" material="metalness:0; roughness:1" position="-155 -15 50" rotation="0 0 0" scale="2 2 2">
+<a-entity class="clickable" 
+          data-note-id="note1"  
+          gltf-model="../assets/note.glb"             
+          id="note1"
+          material="roughness: 1"
+          position="83.17516 0.07182 53.52107"
+          rotation="-90.00021045914971 45 0"
+          scale="2 2 2"
+          style="opacity: 1;"
+          visible="">
 </a-entity>
-<a-entity gltf-model="../assets/door2.glb" id="door2" material="metalness:0; roughness:1" position="49.27468 -56.919 -55.102" rotation="0 90 0" scale="0.5 0.5 1">
+<a-entity gltf-model="../assets/door2.glb" 
+          id="door2" 
+          material="metalness:0; roughness:1" 
+          position="49.27468 -56.919 -55.102" 
+          rotation="0 90 0" 
+          scale="0.5 0.5 1">
 </a-entity>
-<a-entity gltf-model="../assets/door2.glb" id="door2-2" material="metalness:0; roughness:1" position="64.30275 -56.919 -150.65362" rotation="0 270 0" scale="0.5 0.5 1">
+<a-entity gltf-model="../assets/door2.glb" 
+          id="door2-2" 
+          material="metalness:0; roughness:1" 
+          position="64.30275 -56.919 -150.65362" 
+          rotation="0 270 0" 
+          scale="0.5 0.5 1">
 </a-entity>
-<a-entity gltf-model="../assets/door3.glb" id="door3" material="metalness:0; roughness:1" position="-54.88653 -60 185" rotation="" scale="0.25 0.30 0.25">
+<a-entity gltf-model="../assets/door3.glb" 
+          id="door3" 
+          material="metalness:0; roughness:1" 
+          position="-54.88653 -60 185" 
+          rotation="" 
+          scale="0.25 0.30 0.25">
 </a-entity>
 <!-- POPUP NOTA -->
 <!-- Esferas de teletransporte -->
@@ -48,7 +76,7 @@
 <!-- Cámara / jugador -->
 <a-entity id="playerRig" position="0 0 0">
 <a-entity camera="" look-controls="">
-<!-- Cursor para hacer click -->
+<!-- Cursor para hacer porclick -->
 <a-cursor fuse="false" raycaster="objects: .clickable, .teleport"></a-cursor>
 </a-entity>
 </a-entity>
@@ -76,10 +104,18 @@
       document.querySelector('a-scene').setAttribute('teleport-on-click', '');
     </script>
 <script defer="">
+<<<<<<< HEAD
   
   questionGate("#door2", 1, "../lavabos/index.html", "status_nota 1");
   catchableObject("#note1","status_nota 1", "📝1");
   questionGate("#door3", 2, "../passadis/index.html", "status_nota 2");
+=======
+  catchableObject("#note1","status_nota 1", "📝1");
+  questionGate("#door2", 0, "../lavabos/index.html?pos=1", "status_nota 2");
+  questionGate("#door2-2", 0, "../lavabos/index.html?pos=2", "status_nota 1");
+  questionGate("#door3", 0, "../passadis/index.html", "status_nota 2");
+
+>>>>>>> 6f79b58 (millores)
 </script>
 </a-scene>
 <script src="../js/note-system.js"></script>
