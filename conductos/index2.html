@@ -11,7 +11,6 @@
      if (new URLSearchParams(window.location.search).has('clear')){
       resetStatus();
      }
-
   </script>
 
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
@@ -69,7 +68,7 @@
     <a-entity id="playerRig" position="0 0 -110">
       <a-entity camera look-controls>
         <!-- Cursor para hacer click -->
-        <a-cursor fuse="false" raycaster="objects: .teleport, .teleport2"></a-cursor>
+        <a-cursor fuse="false" raycaster="objects: .teleport, .teleport2, .clickable"></a-cursor>
       </a-entity>
     </a-entity>
 
@@ -81,35 +80,29 @@
     <!-- Componente de teletransporte -->
     <script>
       AFRAME.registerComponent('teleport-on-click', {
-  init: function () {
-    const player = document.getElementById('playerRig');
-
-    // Teleport normal
-    const teleports = document.querySelectorAll('.teleport');
-    teleports.forEach(function (sphere) {
-      sphere.addEventListener('click', function () {
-        const pos = sphere.getAttribute('position');
-        player.setAttribute('position', `${pos.x} ${pos.y} ${pos.z}`);
+        init: function () {
+          const player = document.getElementById('playerRig');
+          const teleports = document.querySelectorAll('.teleport');
+          teleports.forEach(function (sphere) {
+            sphere.addEventListener('click', function () {
+              const pos = sphere.getAttribute('position');
+              player.setAttribute('position', `${pos.x} ${pos.y} ${pos.z}`);
+            });
+          });
+        }
       });
-    });
-  }
-});
       document.querySelector('a-scene').setAttribute('teleport-on-click', '');
     </script>
 
   </a-scene>
 
 <script defer>
-  questionGate("#trampilla3", 0, "index.html", "status_nota 8");
-  catchableObject("#note9","status_nota 9", "📝9");
-<<<<<<< HEAD
-  questionGate("#trampilla4", 9, "../interrogatorio/index.html", "status_nota 9");
-
-
-
-=======
-  questionGate("#trampilla4", 0, "../interrogatorio/index.html", "status_nota 9");
->>>>>>> 6f79b58 (millores)
+  loadQuestions("assets/questions.json").then(data => {
+    questions = data;
+    questionGate("#trampilla3", 0, "index.html", "status_nota 8");
+    catchableObject("#note9","status_nota 9", "📝9");
+    questionGate("#trampilla4", 9, "../interrogatorio/index.html", "status_nota 9");
+  });
 </script>
 </body>
 </html>

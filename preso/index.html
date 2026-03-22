@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8" />
-<title>A-Frame — Corregido</title>
+<title>A-Frame — Preso</title>
 
 <script src="https://aframe.io/releases/1.4.1/aframe.min.js"></script>
 <script src="https://agarci9inscastellet.github.io/scaperoom/js/scaperoom.js"></script>
@@ -11,7 +11,6 @@
 <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
 <script>
-
 // reset
 if (new URLSearchParams(window.location.search).has('clear')) {
     resetStatus();
@@ -20,52 +19,36 @@ if (new URLSearchParams(window.location.search).has('clear')) {
 // TELEPORT
 AFRAME.registerComponent('teleport-on-click', {
     init: function () {
-
         const player = document.getElementById('playerRig');
-
         this.el.addEventListener('click', (evt) => {
-
             if (evt.target.classList.contains('teleport')) {
-
                 const pos = evt.target.getAttribute('position');
-
                 player.setAttribute('position', {
                     x: pos.x,
                     y: 1.6,
                     z: pos.z
                 });
-
             }
-
         });
     }
 });
-
 </script>
 </head>
 
-
 <body>
-
 <a-scene cursor="rayOrigin: mouse"
          renderer="antialias: true; colorManagement: true"
          teleport-on-click>
 
 <a-assets>
-
 <a-asset-item id="modelPreso" src="preso.glb"></a-asset-item>
 <a-asset-item id="modelDoor" src="../assets/door7.glb"></a-asset-item>
 <a-asset-item id="modelCassette" src="../assets/cassette.glb"></a-asset-item>
 <a-asset-item id="modelNote" src="../assets/note.glb"></a-asset-item>
-
 </a-assets>
 
-
 <!-- PERSONAJE -->
-<a-entity gltf-model="#modelPreso"
-          position="-0.95 0.99 0.54">
-</a-entity>
-
+<a-entity gltf-model="#modelPreso" position="-0.95 0.99 0.54"></a-entity>
 
 <!-- PUERTA -->
 <a-entity id="door7"
@@ -76,14 +59,12 @@ AFRAME.registerComponent('teleport-on-click', {
           scale="0.5 0.6 0.4">
 </a-entity>
 
-
 <!-- CASSETTE -->
 <a-entity id="cassette1"
           class="clickable"
           gltf-model="#modelCassette"
           position="-0.4 0.43 1.09">
 </a-entity>
-
 
 <!-- NOTA -->
 <a-entity id="entidadNota5"
@@ -95,62 +76,45 @@ AFRAME.registerComponent('teleport-on-click', {
           scale="0.05 0.05 0.05">
 </a-entity>
 
-
 <!-- ENTIDAD AUDIO -->
-<a-entity id="sound"
-          sound="autoplay:false">
-</a-entity>
-
+<a-entity id="sound" sound="autoplay:false; positional: false;"></a-entity>
 
 <!-- JUGADOR -->
 <a-entity id="playerRig" position="0 -0.5 0">
-
-<a-entity camera
-          look-controls
-          position="0 1.6 0">
-
-<a-cursor fuse="false"
-          raycaster="objects: .clickable, .teleport">
-</a-cursor>
-
+    <a-entity camera look-controls position="0 1.6 0">
+        <a-cursor fuse="false" raycaster="objects: .clickable, .teleport"></a-cursor>
+    </a-entity>
 </a-entity>
-</a-entity>
-
 
 <!-- LUCES -->
 <a-entity light="type: ambient; intensity: 0.7"></a-entity>
 <a-entity light="type: directional; intensity: 0.8" position="1 2 1"></a-entity>
 
-
 </a-scene>
-
-
 
 <script src="../js/note-system.js"></script>
 <script src="../js/audios.js"></script>
 
-
 <script>
-// inicializar scaperoom
 window.addEventListener('load', () => {
-
-    catchableObject("#entidadNota5", "status_nota 5", "📝5");
-
-    questionGate("#door7", 0, "../enfermeria/index.html", "status_nota 4");
-
+    // Aunque no haya preguntas en este nivel, cargamos por si acaso
+    loadQuestions("../inici/assets/questions.json").then(data => {
+        questions = data;
+        catchableObject("#entidadNota5", "status_nota 5", "📝5");
+        questionGate("#door7", 0, "../enfermeria/index.html", "status_nota 4");
+    });
 });
 
-const sound = document.querySelector("#sound");
 const cassette = document.querySelector("#cassette1");
-cassette.addEventListener("click", () => {
-
-    playAudio("preso"); // Asegúrate que este nombre existe en audios.js
-    cassette.setAttribute("visible", false);
-
-});
-
+if (cassette) {
+    cassette.addEventListener("click", () => {
+        if (typeof playAudio === "function") {
+            playAudio("preso");
+        }
+        cassette.setAttribute("visible", false);
+        cassette.classList.remove("clickable");
+    });
+}
 </script>
-
-
 </body>
 </html>

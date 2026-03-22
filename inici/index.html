@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
 <meta charset="utf-8"/>
@@ -7,11 +6,10 @@
 <script src="https://aframe.io/releases/1.4.1/aframe.min.js"></script>
 <script src="https://agarci9inscastellet.github.io/scaperoom/js/scaperoom.js"></script>
 <script defer="">
-     if (new URLSearchParams(window.location.search).has('?clear')){
+     if (new URLSearchParams(window.location.search).has('clear')){
       resetStatus();
      }
-
-  </script>
+</script>
 <link href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" rel="stylesheet" type="text/css"/>
 <script src="https://cdn.jsdelivr.net/npm/toastify-js" type="text/javascript"></script>
 </head>
@@ -32,15 +30,14 @@
           scale="1 1 1">
 </a-entity>
 <a-entity class="clickable" 
-          data-note-id="note1"  
-          gltf-model="../assets/note.glb"             
-          id="note1"
-          material="roughness: 1"
-          position="83.17516 0.07182 53.52107"
-          rotation="-90.00021045914971 45 0"
-          scale="2 2 2"
-          style="opacity: 1;"
-          visible="">
+          data-note-id="note1" 
+          gltf-model="../assets/note.glb" 
+          id="note1" 
+          material="roughness: 1" 
+          position="-153.34 -14.8 37.67" 
+          rotation="0 45 0" 
+          scale="2 2 2" 
+          visible="true">
 </a-entity>
 <a-entity gltf-model="../assets/door2.glb" 
           id="door2" 
@@ -60,23 +57,22 @@
           id="door3" 
           material="metalness:0; roughness:1" 
           position="-54.88653 -60 185" 
-          rotation="" 
+          rotation="0 0 0" 
           scale="0.25 0.30 0.25">
 </a-entity>
-<!-- POPUP NOTA -->
 <!-- Esferas de teletransporte -->
 <a-sphere class="teleport" color="#FF0000" position="33 61 -133" radius="3"></a-sphere>
 <a-sphere class="teleport" color="#FF0000" position="33 61 152" radius="3"></a-sphere>
 <a-sphere class="teleport" color="#FF0000" position="-128 61 -133" radius="3"></a-sphere>
 <a-sphere class="teleport" color="#FF0000" position="-128 65 151" radius="3"></a-sphere>
-<a-sphere class="teleport" color="#FF0000" geometry=""status_nota material="" position="-53 -0 133" radius="3"></a-sphere>
-<a-sphere class="teleport" color="#FF0000" geometry="" material="" position="38 -0 -0" radius="3"></a-sphere>
-<a-sphere class="teleport" color="#FF0000" geometry="" material="" position="-51 -0 -173" radius="3"></a-sphere>
-<a-sphere class="teleport" color="#FF0000" geometry="" material="" position="-152 -0 -0" radius="4"></a-sphere>
+<a-sphere class="teleport" color="#FF0000" position="-53 -0 133" radius="3"></a-sphere>
+<a-sphere class="teleport" color="#FF0000" position="38 -0 -0" radius="3"></a-sphere>
+<a-sphere class="teleport" color="#FF0000" position="-51 -0 -173" radius="3"></a-sphere>
+<a-sphere class="teleport" color="#FF0000" position="-152 -0 -0" radius="4"></a-sphere>
 <!-- Cámara / jugador -->
 <a-entity id="playerRig" position="0 0 0">
 <a-entity camera="" look-controls="">
-<!-- Cursor para hacer porclick -->
+<!-- Cursor para hacer click -->
 <a-cursor fuse="false" raycaster="objects: .clickable, .teleport"></a-cursor>
 </a-entity>
 </a-entity>
@@ -84,14 +80,12 @@
 <a-entity light="type: ambient; intensity: 0.7"></a-entity>
 <a-entity light="type: directional; intensity: 1" position="105 -190 5" rotation="-45 45 0"></a-entity>
 <a-entity light="type: hemisphere; skyColor: #ffffff; groundColor: #444444; intensity: 0.5"></a-entity>
-<!--Notes-->
 <!-- Componente de teletransporte -->
 <script>
       AFRAME.registerComponent('teleport-on-click', {
         init: function () {
           const spheres = document.querySelectorAll('.teleport');
           const player = document.getElementById('playerRig');
-
           spheres.forEach(function(sphere) {
             sphere.addEventListener('click', function () {
               const pos = sphere.getAttribute('position');
@@ -100,22 +94,16 @@
           });
         }
       });
-
       document.querySelector('a-scene').setAttribute('teleport-on-click', '');
-    </script>
+</script>
 <script defer="">
-<<<<<<< HEAD
-  
-  questionGate("#door2", 1, "../lavabos/index.html", "status_nota 1");
-  catchableObject("#note1","status_nota 1", "📝1");
-  questionGate("#door3", 2, "../passadis/index.html", "status_nota 2");
-=======
-  catchableObject("#note1","status_nota 1", "📝1");
-  questionGate("#door2", 0, "../lavabos/index.html?pos=1", "status_nota 2");
-  questionGate("#door2-2", 0, "../lavabos/index.html?pos=2", "status_nota 1");
-  questionGate("#door3", 0, "../passadis/index.html", "status_nota 2");
-
->>>>>>> 6f79b58 (millores)
+  loadQuestions("assets/questions.json").then(data => {
+    questions = data;
+    questionGate("#door2", 1, "../lavabos/index.html", "status_nota 1");
+    catchableObject("#note1","status_nota 1", "📝1");
+    questionGate("#door3", 2, "../passadis/index.html", "status_nota 2");
+    questionGate("#door2-2", 0, "../lavabos/index.html?pos=2", "status_nota 1");
+  });
 </script>
 </a-scene>
 <script src="../js/note-system.js"></script>

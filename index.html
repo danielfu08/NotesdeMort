@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
 <meta charset="utf-8"/>
 <script defer="">
-     if (new URLSearchParams(window.location.search).has('?clear')){
-      resetStatus();
+     if (new URLSearchParams(window.location.search).has('clear')){
+      // El resetStatus se define en scaperoom.js, pero aquí no se carga.
+      // Sin embargo, el juego redirige a inici/index.html?clear que sí lo tiene.
+      // Dejamos esto por consistencia si se decide añadir scaperoom.js aquí.
      }
-
   </script>
 <title>Arxiu █████</title>
 <style>

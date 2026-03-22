@@ -11,7 +11,6 @@
      if (new URLSearchParams(window.location.search).has('clear')){
       resetStatus();
      }
-
   </script>
 
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
@@ -54,7 +53,7 @@
               material="metalness:0; roughness:1">
     </a-entity>
 
-        <a-entity 
+    <a-entity 
               id="trampilla3"
               gltf-model="#conductrap"
               position="0 -0.8 -100"
@@ -64,17 +63,17 @@
     </a-entity>
 
     <!-- Esferas de teletransporte -->
-    <a-sphere class="teleport2" position="0 0 -90" radius="2" color="#FF0000" material="" geometry=""></a-sphere>
-    <a-sphere class="teleport2" position="0 0 0" radius="2" color="#FF0000" material="" geometry=""></a-sphere>
-    <a-sphere class="teleport" position="0 0 -90" radius="2" color="#FF0000" material="" geometry=""></a-sphere>
-    <a-sphere class="teleport" position="0 0 0" radius="2" color="#FF0000" material="" geometry=""></a-sphere>
+    <a-sphere class="teleport2" position="0 0 -90" radius="2" color="#FF0000"></a-sphere>
+    <a-sphere class="teleport2" position="0 0 0" radius="2" color="#FF0000"></a-sphere>
+    <a-sphere class="teleport" position="0 0 -90" radius="2" color="#FF0000"></a-sphere>
+    <a-sphere class="teleport" position="0 0 0" radius="2" color="#FF0000"></a-sphere>
 
 
     <!-- Cámara / jugador -->
     <a-entity id="playerRig" position="0 0 0">
       <a-entity camera look-controls>
         <!-- Cursor para hacer click -->
-        <a-cursor fuse="false" raycaster="objects: .teleport, .teleport2"></a-cursor>
+        <a-cursor fuse="false" raycaster="objects: .teleport, .teleport2, .clickable"></a-cursor>
       </a-entity>
     </a-entity>
 
@@ -86,44 +85,36 @@
     <!-- Componente de teletransporte -->
     <script>
       AFRAME.registerComponent('teleport-on-click', {
-  init: function () {
-    const player = document.getElementById('playerRig');
-
-    // Teleport normal
-    const teleports = document.querySelectorAll('.teleport');
-    teleports.forEach(function (sphere) {
-      sphere.addEventListener('click', function () {
-        const pos = sphere.getAttribute('position');
-        player.setAttribute('position', `${pos.x} ${pos.y + 15} ${pos.z}`);
+        init: function () {
+          const player = document.getElementById('playerRig');
+          const teleports = document.querySelectorAll('.teleport');
+          teleports.forEach(function (sphere) {
+            sphere.addEventListener('click', function () {
+              const pos = sphere.getAttribute('position');
+              player.setAttribute('position', `${pos.x} ${pos.y + 1.6} ${pos.z}`);
+            });
+          });
+          const teleports2 = document.querySelectorAll('.teleport2');
+          teleports2.forEach(function (sphere) {
+            sphere.addEventListener('click', function () {
+              const pos = sphere.getAttribute('position');
+              player.setAttribute('position', `${pos.x} ${pos.y} ${pos.z}`);
+            });
+          });
+        }
       });
-    });
-
-    // Teleport diferente
-    const teleports2 = document.querySelectorAll('.teleport2');
-    teleports2.forEach(function (sphere) {
-      sphere.addEventListener('click', function () {
-        const pos = sphere.getAttribute('position');
-
-        // Teletransporte distinto
-        player.setAttribute('position', `${pos.x} ${pos.y} ${pos.z}`);
-
-        // Ejemplo extra: cambiar rotación
-        player.setAttribute('rotation', `0 0 0`);
-      });
-    });
-  }
-});
       document.querySelector('a-scene').setAttribute('teleport-on-click', '');
     </script>
 
   </a-scene>
 
 <script defer>
-  questionGate("#trampilla", 7, "../atico/index.html", "status_nota 7");
-  questionGate("#trampilla2", 0, "../passadis/index2.html", "status_nota 7");
-  questionGate("#trampilla3", 8, "index2.html", "status_nota 8");
-
-
+  loadQuestions("assets/questions.json").then(data => {
+    questions = data;
+    questionGate("#trampilla", 7, "../atico/index.html", "status_nota 7");
+    questionGate("#trampilla2", 0, "../passadis/index2.html", "status_nota 7");
+    questionGate("#trampilla3", 8, "index2.html", "status_nota 8");
+  });
 </script>
 
 </body>

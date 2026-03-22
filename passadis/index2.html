@@ -1,17 +1,15 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
 <meta charset="utf-8"/>
-<title>A-Frame — passadis.glb con teletransporte</title>
+<title>A-Frame — Pasillo 2</title>
 <script src="https://aframe.io/releases/1.4.1/aframe.min.js"></script>
 <script src="https://agarci9inscastellet.github.io/scaperoom/js/scaperoom.js"></script>
 <script defer="">
-     if (new URLSearchParams(window.location.search).has('?clear')){
+     if (new URLSearchParams(window.location.search).has('clear')){
       resetStatus();
      }
-
-  </script>
+</script>
 <link href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" rel="stylesheet" type="text/css"/>
 <script src="https://cdn.jsdelivr.net/npm/toastify-js" type="text/javascript"></script>
 </head>
@@ -45,7 +43,7 @@
 <a-entity id="playerRig" position="50.798 0 -200">
 <a-entity camera="" look-controls="">
 <!-- Cursor para hacer click -->
-<a-cursor fuse="false" raycaster="objects: .clickable, .teleport, .teleport2"></a-cursor>
+<a-cursor fuse="false" raycaster="objects: .clickable, .teleport"></a-cursor>
 </a-entity>
 </a-entity>
 <!-- Iluminación -->
@@ -55,43 +53,30 @@
 <!-- Componente de teletransporte -->
 <script>
       AFRAME.registerComponent('teleport-on-click', {
-  init: function () {
-    const player = document.getElementById('playerRig');
-
-    // Teleport normal
-    const teleports = document.querySelectorAll('.teleport');
-    teleports.forEach(function (sphere) {
-      sphere.addEventListener('click', function () {
-        const pos = sphere.getAttribute('position');
-        player.setAttribute('position', `${pos.x} ${pos.y + 15} ${pos.z}`);
+        init: function () {
+          const player = document.getElementById('playerRig');
+          const teleports = document.querySelectorAll('.teleport');
+          teleports.forEach(function (sphere) {
+            sphere.addEventListener('click', function () {
+              const pos = sphere.getAttribute('position');
+              player.setAttribute('position', `${pos.x} ${pos.y + 15} ${pos.z}`);
+            });
+          });
+        }
       });
-    });
-
-    // Teleport diferente
-    const teleports2 = document.querySelectorAll('.teleport2');
-    teleports2.forEach(function (sphere) {
-      sphere.addEventListener('click', function () {
-        const pos = sphere.getAttribute('position');
-
-        // Teletransporte distinto
-        player.setAttribute('position', `${pos.x} ${pos.y} ${pos.z}`);
-
-        // Ejemplo extra: cambiar rotación
-        player.setAttribute('rotation', `0 0 0`);
-      });
-    });
-  }
-});
       document.querySelector('a-scene').setAttribute('teleport-on-click', '');
-    </script>
+</script>
 </a-scene>
 <script defer="">
-  catchableObject("#note3","status_nota 3", "📝3");
-  questionGate("#trampilla2", 0, "../conductos/index.html", "status_nota 7");
-  questionGate("#door3", 0, "../inici/index.html", "status_nota 2");
-  questionGate("#door4", 3, "../enfermeria/index.html", "status_nota 3");
-  questionGate("#door4-2", 5, "../biblioteca/index.html", "status_nota 5");
-
+  loadQuestions("assets/questions.json").then(data => {
+    questions = data;
+    catchableObject("#note3","status_nota 3", "📝3");
+    questionGate("#trampilla2", 0, "../conductos/index.html", "status_nota 7");
+    questionGate("#door3", 0, "../inici/index.html", "status_nota 2");
+    questionGate("#door4", 3, "../enfermeria/index.html", "status_nota 3");
+    questionGate("#door4-2", 5, "../biblioteca/index.html", "status_nota 5");
+  });
 </script>
-<script src="../js/note-system.js"></script></body>
+<script src="../js/note-system.js"></script>
+</body>
 </html>

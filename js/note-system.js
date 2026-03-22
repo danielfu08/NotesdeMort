@@ -1,6 +1,7 @@
 let notesData = {};
 
 function createNotePopup() {
+  if (document.getElementById('notePopup')) return;
   const popupHTML = `
     <div id="notePopup" style="
       display:none;
@@ -36,20 +37,20 @@ function createNotePopup() {
 }
 
 async function loadNotes() {
-  try {
-    // Intentar cargar desde ../ o desde ./ (para el root)
-    let response = await fetch('../notas.json');
-    if (!response.ok) {
-      response = await fetch('../notas.json');
+  const paths = ['./notas.json', '../notas.json', '../../notas.json'];
+  for (const path of paths) {
+    try {
+      const response = await fetch(path);
+      if (response.ok) {
+        notesData = await response.json();
+        console.log('Notas cargadas desde:', path, notesData);
+        return;
+      }
+    } catch (e) {
+      // Continue to next path
     }
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    notesData = await response.json();
-    console.log('Notas cargadas:', notesData);
-  } catch (error) {
-    console.error('Error al cargar notas.json:', error);
   }
+  console.error('No se pudo cargar notas.json desde ninguna ruta conocida.');
 }
 
 function openNote(noteId) {
@@ -72,7 +73,10 @@ function attachClickHandlers() {
   clickableEntities.forEach(entity => {
     const noteId = entity.getAttribute('data-note-id');
     if (noteId) {
-      entity.addEventListener('click', () => openNote(noteId));
+      // Evitar duplicados
+      entity.removeEventListener('click', entity._noteHandler);
+      entity._noteHandler = () => openNote(noteId);
+      entity.addEventListener('click', entity._noteHandler);
     }
   });
 }
@@ -81,17 +85,17 @@ function attachClickHandlers() {
 document.addEventListener('DOMContentLoaded', () => {
   createNotePopup();
   loadNotes().then(() => {
-    // Attach handlers after notes are loaded and popup is created
     attachClickHandlers();
   });
 
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && document.getElementById('notePopup').style.display === 'flex') {
+    if (event.key === 'Escape' && document.getElementById('notePopup') && document.getElementById('notePopup').style.display === 'flex') {
       closeNote();
     }
   });
 
-  document.getElementById('notePopup').addEventListener('click', (event) => {
+  // Delegación de eventos para el popup
+  document.addEventListener('click', (event) => {
     if (event.target.id === 'notePopup') {
       closeNote();
     }

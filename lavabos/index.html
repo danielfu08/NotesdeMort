@@ -28,7 +28,7 @@
 
     <a-entity gltf-model="#bathModel" 
               position="1550 -50 1340" 
-              rotation="0 0 0" 40.000
+              rotation="0 0 0" 
               scale="1 1 1">
     </a-entity>
 
@@ -64,7 +64,7 @@
               scale="40 40 40">
     </a-entity>
 
-    <a-entity id="sound" sound="src: #idDeTuAudio; autoplay: false; positional: false"></a-entity>
+    <a-entity id="sound" sound="autoplay: false; positional: false"></a-entity>
 
     <a-sphere class="teleport" color="#FF0000" position="80.17 -20 0.52" radius="3"></a-sphere>
     <a-sphere class="teleport" color="#FF0000" position="0 -20 0" radius="3"></a-sphere>
@@ -98,6 +98,7 @@
 
       // Lógica de juego al cargar el DOM
       document.addEventListener('DOMContentLoaded', () => {
+        // Cargar preguntas si es necesario (aunque aquí se use questionGate con ID 0)
         
         // 1. Manejo de Puertas y Notas (Funciones de scaperoom.js)
         if(typeof questionGate === "function") {
